@@ -1,0 +1,641 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YECOSA (YCI) 06 SET — Executive Nominations 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1B5E2F;--green2:#236B39;--green3:#0F3D1E;
+  --yellow:#F0C830;--yellow2:#FDF6D8;--yellow3:#e6b800;
+  --khaki:#C8A84B;--bg:#F2EFE8;--white:#fff;
+  --slate:#5A6B5D;--slate2:#E2EAE4;
+  --red:#A03025;--red2:#FAEAE8;
+  --border:#C8D4CA;--text:#1A2A1E;
+  --success:#2E7D5A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:80px}
+
+.header{background:var(--green);padding:28px 20px 24px;text-align:center}
+.header-pill{background:var(--yellow);color:var(--green);font-family:'Nunito',sans-serif;font-weight:900;font-size:11px;padding:3px 14px;border-radius:20px;display:inline-block;margin-bottom:8px;letter-spacing:.5px}
+.header h1{font-family:'Nunito',sans-serif;font-weight:900;font-size:22px;color:#fff;line-height:1.2;margin-bottom:4px}
+.header p{font-size:12px;color:rgba(255,255,255,0.5)}
+
+.steps{display:flex;align-items:center;justify-content:center;padding:20px 20px 4px;gap:0;max-width:400px;margin:0 auto}
+.step{display:flex;flex-direction:column;align-items:center;flex:1}
+.step-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:13px;border:2.5px solid var(--border);background:var(--white);color:var(--slate);transition:all .3s}
+.step-label{font-size:10px;color:var(--slate);margin-top:4px;font-weight:600;letter-spacing:.3px}
+.step-line{flex:1;height:2px;background:var(--border);margin-top:-18px;transition:background .3s}
+.step.active .step-circle{background:var(--green);border-color:var(--green);color:#fff}
+.step.active .step-label{color:var(--green);font-weight:700}
+.step.done .step-circle{background:var(--yellow);border-color:var(--yellow3);color:var(--green3)}
+.step.done .step-label{color:var(--success)}
+.step-line.done{background:var(--green)}
+
+.screen{display:none;max-width:560px;margin:0 auto;padding:0 16px}
+.screen.active{display:block}
+
+.card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:28px 24px;margin-top:16px}
+.card-center{text-align:center}
+.card-icon{font-size:40px;margin-bottom:12px}
+.card h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:var(--green);margin-bottom:6px}
+.card > p{font-size:13px;color:var(--slate);line-height:1.6;margin-bottom:20px}
+
+/* ── NAME SEARCH ── */
+.search-wrap{position:relative;margin-bottom:6px}
+.search-input{width:100%;border:2px solid var(--border);border-radius:10px;padding:12px 14px 12px 40px;font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:border-color .2s;color:var(--text);background:var(--white)}
+.search-input:focus{border-color:var(--green)}
+.search-input.ok{border-color:var(--success);background:rgba(46,125,90,0.03)}
+.search-input.error{border-color:var(--red)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:15px;pointer-events:none}
+
+.results-list{border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:8px;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.08)}
+.result-item{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--slate2);display:flex;align-items:center;gap:10px;transition:background .15s;background:var(--white)}
+.result-item:last-child{border-bottom:none}
+.result-item:hover{background:rgba(27,94,47,0.05)}
+.result-avatar{width:32px;height:32px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;flex-shrink:0}
+.result-name{font-weight:600;font-size:13px;color:var(--text)}
+.result-sub{font-size:11px;color:var(--slate);margin-top:1px}
+.no-results{padding:12px 14px;font-size:13px;color:var(--slate);text-align:center;background:var(--white)}
+
+.sel-badge{display:none;align-items:center;gap:10px;background:rgba(27,94,47,0.07);border:1.5px solid rgba(27,94,47,0.2);border-radius:9px;padding:10px 14px;margin-bottom:4px}
+.sel-badge.show{display:flex}
+.sel-badge .av{width:32px;height:32px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;flex-shrink:0}
+.sel-badge .nm{font-weight:700;font-size:13px;color:var(--green);flex:1}
+.sel-badge .chg{font-size:11.5px;color:var(--green);font-weight:600;cursor:pointer;text-decoration:underline;white-space:nowrap}
+
+/* ── POSITION BLOCKS ── */
+.pos-block{background:var(--white);border-radius:14px;border:1.5px solid var(--border);overflow:hidden;margin-top:12px}
+.pos-block-header{background:var(--green);padding:11px 16px;display:flex;align-items:center;gap:10px}
+.pos-num{width:22px;height:22px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:11px;color:var(--green3);flex-shrink:0}
+.pos-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#fff;flex:1}
+.pos-status{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:10px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7)}
+.pos-status.done-tag{background:var(--yellow);color:var(--green3)}
+.pos-body{padding:14px 16px}
+
+/* ── SELF TOGGLE inside each position ── */
+.self-toggle{display:flex;align-items:center;gap:8px;margin-bottom:10px;cursor:pointer;user-select:none}
+.self-toggle input[type=checkbox]{width:16px;height:16px;accent-color:var(--green);flex-shrink:0;cursor:pointer}
+.self-toggle span{font-size:12.5px;color:var(--slate);font-weight:500}
+
+/* ── MISC ── */
+.field label{display:block;font-size:11px;font-weight:700;color:var(--slate);margin-bottom:5px;letter-spacing:.4px;text-transform:uppercase}
+.nominator-bar{display:flex;align-items:center;gap:12px;background:rgba(27,94,47,0.07);border:1.5px solid rgba(27,94,47,0.2);border-radius:10px;padding:12px 16px;margin-top:16px;margin-bottom:4px}
+.nominator-bar .av{width:36px;height:36px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;flex-shrink:0}
+.nominator-bar .info .name{font-weight:700;font-size:14px;color:var(--green)}
+.nominator-bar .info .sub{font-size:11.5px;color:var(--slate);margin-top:1px}
+
+.msg{font-size:12.5px;padding:10px 14px;border-radius:8px;margin-bottom:10px;line-height:1.5}
+.msg.error{background:var(--red2);color:var(--red)}
+.msg.success{background:rgba(46,125,90,0.1);color:var(--success)}
+.msg-hidden{display:none!important}
+
+.btn{width:100%;padding:14px;border-radius:10px;border:none;font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;cursor:pointer;transition:all .2s;margin-top:4px}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{background:var(--green2)}
+.btn-green:disabled{background:var(--slate2);color:var(--slate);cursor:not-allowed}
+.btn-outline{background:transparent;color:var(--green);border:2px solid var(--green);margin-top:10px}
+.btn-outline:hover{background:rgba(27,94,47,0.06)}
+
+.confirm-row{display:flex;justify-content:space-between;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--slate2);font-size:13px}
+.confirm-row:last-child{border-bottom:none}
+.confirm-label{color:var(--slate);font-weight:500;flex-shrink:0;margin-right:12px}
+.confirm-value{font-weight:600;color:var(--text);text-align:right}
+.confirm-section{font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;color:var(--green);text-transform:uppercase;letter-spacing:.5px;margin:14px 0 4px}
+
+.success-ring{width:72px;height:72px;border-radius:50%;background:rgba(46,125,90,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:34px}
+.ref-box{background:var(--yellow2);border:1.5px dashed var(--khaki);border-radius:10px;padding:14px;text-align:center;margin:16px 0}
+.ref-box small{font-size:11px;color:var(--slate);display:block;margin-bottom:4px}
+.ref-code{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:var(--green);letter-spacing:1px}
+
+.closed-banner{max-width:560px;margin:24px auto 0;padding:0 16px}
+.closed-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:36px 24px;text-align:center}
+.closed-icon{font-size:44px;margin-bottom:14px}
+.closed-card h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:var(--red);margin-bottom:8px}
+.closed-card p{font-size:13.5px;color:var(--slate);line-height:1.7}
+
+.privacy-note{display:flex;align-items:flex-start;gap:8px;background:var(--yellow2);border:1px solid rgba(200,168,75,0.4);border-radius:8px;padding:12px 14px;margin-top:14px}
+.privacy-note span{font-size:18px;flex-shrink:0}
+.privacy-note p{font-size:11.5px;color:#7a5e00;line-height:1.5}
+
+.progress-bar{height:4px;background:var(--slate2);border-radius:4px;margin:14px 0 4px;overflow:hidden}
+.progress-fill{height:100%;background:var(--green);border-radius:4px;transition:width .4s}
+.progress-label{font-size:11px;color:var(--slate);text-align:right;margin-bottom:12px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-pill">YECOSA (YCI) 06 SET</div>
+  <h1>Executive Nominations 2026</h1>
+  <p>Nominations close Wednesday 21 October 2026 at 11:59 PM</p>
+</div>
+
+<div class="steps" id="step-indicator">
+  <div class="step active" id="s1"><div class="step-circle">1</div><div class="step-label">VERIFY</div></div>
+  <div class="step-line" id="line-1-2"></div>
+  <div class="step" id="s2" style="opacity:.4"><div class="step-circle">2</div><div class="step-label">NOMINATE</div></div>
+  <div class="step-line" id="line-2-3"></div>
+  <div class="step" id="s3" style="opacity:.4"><div class="step-circle">3</div><div class="step-label">CONFIRM</div></div>
+</div>
+
+<!-- ══ SCREEN 1: VERIFY ══ -->
+<div class="screen active" id="screen-verify">
+  <div class="card card-center">
+    <div class="card-icon">📋</div>
+    <h2>Who are you?</h2>
+    <p>Search your name to confirm you are a YECOSA (YCI) 06 SET member before nominating.</p>
+    <div class="field">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="self-search" class="search-input" placeholder="Type your first name or surname…" oninput="searchMembers('self',this.value)" autocomplete="off">
+      </div>
+      <div style="font-size:11.5px;color:var(--slate);margin-bottom:8px">Type at least 2 letters to search</div>
+      <div class="results-list" id="self-results"></div>
+    </div>
+    <div class="sel-badge" id="self-sel-badge">
+      <div class="av" id="self-av"></div>
+      <span class="nm" id="self-sel-name"></span>
+      <span class="chg" onclick="clearSel('self')">Change</span>
+    </div>
+    <div id="verify-msg" class="msg msg-hidden"></div>
+    <button class="btn btn-green" style="margin-top:12px" onclick="proceedToNominate()">Continue →</button>
+    <div class="privacy-note">
+      <span>🔒</span>
+      <p>Your name confirms membership only. All nominations are reviewed privately by the election committee.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SCREEN 2: NOMINATE (5 positions) ══ -->
+<div class="screen" id="screen-nominate">
+  <div class="nominator-bar" id="nominator-bar" style="max-width:560px;margin:16px auto 0">
+    <div class="av" id="nom-av"></div>
+    <div class="info">
+      <div class="name" id="nom-name"></div>
+      <div class="sub">Nominating on behalf of yourself</div>
+    </div>
+  </div>
+
+  <div style="max-width:560px;margin:0 auto;padding:0 16px">
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+    <div class="progress-label"><span id="prog-count">0</span> of 5 positions filled</div>
+  </div>
+
+  <!-- Position blocks generated by JS -->
+  <div id="positions-container" style="max-width:560px;margin:0 auto;padding:0 16px"></div>
+
+  <div style="max-width:560px;margin:0 auto;padding:0 16px">
+    <div id="form-msg" class="msg msg-hidden" style="margin-top:12px"></div>
+    <button class="btn btn-green" style="margin-top:14px" onclick="goToConfirm()">Review &amp; Confirm →</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 3: CONFIRM ══ -->
+<div class="screen" id="screen-confirm">
+  <div class="card" style="margin-top:16px">
+    <h2 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;color:var(--green);margin-bottom:4px">Confirm Your Nominations</h2>
+    <p style="font-size:12.5px;color:var(--slate);margin-bottom:14px">Review all five positions before submitting. You cannot change this once sent.</p>
+    <div id="confirm-summary"></div>
+    <div id="confirm-msg" class="msg msg-hidden" style="margin-top:12px"></div>
+    <button class="btn btn-green" id="submit-btn" onclick="submitNomination()" style="margin-top:16px">Submit All Nominations ✓</button>
+    <button class="btn btn-outline" onclick="showScreen('nominate');setStep(2)">← Go Back &amp; Edit</button>
+  </div>
+</div>
+
+<!-- ══ SCREEN 4: SUCCESS ══ -->
+<div class="screen" id="screen-success">
+  <div class="card card-center" style="margin-top:16px">
+    <div class="success-ring">🎉</div>
+    <h2 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:var(--success);margin-bottom:8px">Nominations Submitted!</h2>
+    <p style="font-size:13px;color:var(--slate);line-height:1.7;margin-bottom:4px">
+      Your nominations have been received. The election committee will review all submissions after
+      <strong>21 October 2026</strong> and publish the final ballot when voting opens on <strong>26 October</strong>.
+    </p>
+    <div class="ref-box">
+      <small>Nomination Reference</small>
+      <div class="ref-code" id="nom-ref">YCI-NOM-XXXXXX</div>
+    </div>
+    <p style="font-size:12px;color:var(--slate);line-height:1.6">Keep this reference in case you need to follow up with the committee.</p>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// MEMBERS
+// ══════════════════════════════════════════════════════════
+const MEMBERS = [
+  {id:1,  first:'Abiodun',         last:'Ifenaike'},
+  {id:2,  first:'Donald',          last:'Aghughu'},
+  {id:3,  first:'Omolara',         last:'Olatunji'},
+  {id:4,  first:'Deji',            last:'Oguntimehin'},
+  {id:5,  first:'Ibironke',        last:'Batula'},
+  {id:6,  first:'Hammed',          last:'Idowu'},
+  {id:7,  first:'Temitope',        last:'Faniran'},
+  {id:8,  first:'Olalekan',        last:'Olaniyan'},
+  {id:9,  first:'Rukkayat',        last:'Sanni'},
+  {id:10, first:'Babatunde',       last:'Adesi'},
+  {id:11, first:'Jeleel',          last:'Kareem'},
+  {id:12, first:'Janet',           last:'Sossa'},
+  {id:13, first:'Omolara',         last:'Ogundipe'},
+  {id:14, first:'Monsurat',        last:'Yakub'},
+  {id:15, first:'Sekinat',         last:'Popoola Odebiyi'},
+  {id:16, first:'Islamiat',        last:'Yinusa'},
+  {id:17, first:'Kola',            last:'Salako'},
+  {id:18, first:'Moruf',           last:'Olugbenle'},
+  {id:19, first:'Titi',            last:'Agboba'},
+  {id:20, first:'Akorede',         last:'Abijo'},
+  {id:21, first:'Funke',           last:'Akosile'},
+  {id:22, first:'Funmilayo',       last:'Olamokun Omifunto'},
+  {id:23, first:'Martins',         last:'Onweani'},
+  {id:24, first:'Mary',            last:'Akimoji'},
+  {id:25, first:'Temitope',        last:'Amosun'},
+  {id:26, first:'Idris',           last:'Ariyo'},
+  {id:27, first:'Sarah',           last:'Shobola'},
+  {id:28, first:'Taofeek',         last:'Ikumapayi'},
+  {id:29, first:'Temitope',        last:'Ayinde'},
+  {id:30, first:'Lilian',          last:'Ashaka'},
+  {id:31, first:'Modinat',         last:'Bello'},
+  {id:32, first:'Hassan',          last:'Babatunde'},
+  {id:33, first:'Oluseun',         last:'Joseph'},
+  {id:34, first:'Adedeji',         last:'Ogundiran'},
+  {id:35, first:'Olajumoke',       last:'Aikulola'},
+  {id:36, first:'Motunrayo',       last:'Azeez'},
+  {id:37, first:'Seyi Olanrewaju', last:'Moses'},
+  {id:38, first:'Yusuf',           last:'Adewale'},
+  {id:39, first:'Sindy',           last:'Ofum'},
+  {id:40, first:'Oluwaseun',       last:'Oniyirokun'},
+  {id:41, first:'Chioma',          last:'Onyemaobi'},
+  {id:42, first:'Samuel',          last:'Soyoye'},
+  {id:43, first:'Tope Lisa',       last:'Ajayi'},
+  {id:44, first:'Ebenezer',        last:'Falade'},
+  {id:45, first:'Busayo',          last:'Odeyemi'},
+  {id:46, first:'Motunrayo',       last:'Alimi'},
+  {id:47, first:'Samson',          last:'Aringbere'},
+  {id:48, first:'Idris A',         last:'Idowu'},
+  {id:49, first:'Toyin',           last:'Ogunleye'},
+  {id:50, first:'Kabirat',         last:'Akinyemi'},
+  {id:51, first:'Mary',            last:'Ilo'},
+  {id:52, first:'Saidat',          last:'Abdusalam Ibironke'},
+  {id:53, first:'Ann',             last:'Ojene'},
+  {id:54, first:'Damilare',        last:'Olojede'},
+  {id:55, first:'Rasheedat',       last:'Ayoola'},
+  {id:56, first:'Abdurahman',      last:'Adaranijo'},
+  {id:57, first:'Adetola',         last:'Ajayi'},
+  {id:58, first:'Oluwabusayo',     last:'Kareem'},
+  {id:59, first:'Fadekemi',        last:'Alani'},
+  {id:60, first:'Andrew',          last:'Akibhi'},
+  {id:61, first:'Oluyemi',         last:'Itulola'},
+  {id:62, first:'Basirat',         last:'Olatunji'},
+  {id:63, first:'Omolara',         last:'Dokunmu'},
+  {id:64, first:'Gbenga',          last:'Ojo'},
+  {id:65, first:'Monsurat',        last:'Odunayo'},
+  {id:66, first:'Paul',            last:'Bankole'},
+  {id:67, first:'Mary',            last:'Sangolana'},
+  {id:68, first:'Yusuf',           last:'Fetuga'},
+  {id:69, first:'Tawa',            last:'Adeogun'},
+  {id:70, first:'Wuraola',         last:'Akerele'},
+  {id:71, first:'Busayo',          last:'Bamgbose'},
+  {id:72, first:'David',           last:'Bamgboye'},
+  {id:73, first:'Seun',            last:'Kuye'},
+  {id:74, first:'Oluwasegun',      last:'Okunola'},
+  {id:75, first:'Hamed',           last:'Olajide'},
+  {id:76, first:'Basiru',          last:'Olajuwon'},
+  {id:77, first:'Musa',            last:'Sonubi'}
+];
+
+const POSITIONS = [
+  {id:'president', label:'President',           desc:'Executive head of the association'},
+  {id:'vp',        label:'Vice President',       desc:'Supports the President and deputises'},
+  {id:'treasurer', label:'Treasurer',            desc:'Manages association funds'},
+  {id:'finsec',    label:'Financial Secretary',  desc:'Records and tracks all financial transactions'},
+  {id:'welfare',   label:'Welfare Officer',      desc:'Looks after members\' welfare and wellbeing'}
+];
+
+const NOM_CLOSE       = new Date('2026-10-21T23:59:00');
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxql8IQ_VeHxGf69e6Q1AJQWtKhFw2oxdXv7lZAnhLzoXdv4rlUNncaaJ2DpZDr0nGljA/exec';
+
+// ══════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════
+let selfMember = null;
+// nominations[posId] = { member, isSelf }
+const nominations = {};
+
+// ══════════════════════════════════════════════════════════
+// CLOSED CHECK
+// ══════════════════════════════════════════════════════════
+(function(){
+  if(new Date() > NOM_CLOSE){
+    document.getElementById('step-indicator').style.display='none';
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    const b=document.createElement('div');
+    b.className='closed-banner';
+    b.innerHTML=`<div class="closed-card"><div class="closed-icon">🔒</div><h2>Nominations Closed</h2><p>The nomination window closed on <strong>Wednesday 21 October 2026 at 11:59 PM</strong>.<br><br>The election committee is reviewing submissions. The ballot will be published when voting opens on <strong>Monday 26 October 2026</strong>.</p></div>`;
+    document.body.appendChild(b);
+  }
+})();
+
+// ══════════════════════════════════════════════════════════
+// HELPERS
+// ══════════════════════════════════════════════════════════
+function fullName(m){ return m.first+' '+m.last; }
+function initials(m){ return (m.first[0]+(m.last[0]||'')).toUpperCase(); }
+function avatarColor(id){ return ['#1B5E2F','#236B39','#C8A84B','#5A6B5D','#0F3D1E'][id%5]; }
+
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function setStep(n){
+  [1,2,3].forEach(i=>{
+    const s=document.getElementById('s'+i);
+    s.style.opacity='1'; s.classList.remove('active','done');
+    if(i<n) s.classList.add('done');
+    else if(i===n) s.classList.add('active');
+    else s.style.opacity='.4';
+  });
+  document.getElementById('line-1-2').classList.toggle('done',n>1);
+  document.getElementById('line-2-3').classList.toggle('done',n>2);
+}
+function showMsg(id,type,text){ const e=document.getElementById(id); e.className='msg '+type; e.textContent=text; }
+function hideMsg(id){ const e=document.getElementById(id); e.className='msg msg-hidden'; }
+
+// ══════════════════════════════════════════════════════════
+// BUILD POSITION BLOCKS
+// ══════════════════════════════════════════════════════════
+function buildPositionBlocks(){
+  const container = document.getElementById('positions-container');
+  container.innerHTML = POSITIONS.map((pos,i) => `
+    <div class="pos-block" id="block-${pos.id}">
+      <div class="pos-block-header">
+        <div class="pos-num">${i+1}</div>
+        <div class="pos-title">${pos.label}</div>
+        <div class="pos-status" id="status-${pos.id}">Not filled</div>
+      </div>
+      <div class="pos-body">
+        <label class="self-toggle" id="self-toggle-${pos.id}">
+          <input type="checkbox" id="self-chk-${pos.id}" onchange="toggleSelfNom('${pos.id}')">
+          <span>Nominate myself for this position</span>
+        </label>
+        <div id="search-section-${pos.id}">
+          <div class="field"><label>Search nominee</label></div>
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search-${pos.id}" class="search-input"
+              placeholder="Type name…"
+              oninput="searchForPos('${pos.id}',this.value)"
+              autocomplete="off">
+          </div>
+          <div class="results-list" id="results-${pos.id}"></div>
+        </div>
+        <div class="sel-badge" id="sel-badge-${pos.id}">
+          <div class="av" id="sel-av-${pos.id}"></div>
+          <span class="nm" id="sel-name-${pos.id}"></span>
+          <span class="chg" onclick="clearPosNom('${pos.id}')">Change</span>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+// ══════════════════════════════════════════════════════════
+// SEARCH (for a specific position)
+// ══════════════════════════════════════════════════════════
+function searchForPos(posId, query){
+  const q = query.trim().toLowerCase();
+  const listEl = document.getElementById('results-'+posId);
+
+  // clear existing nomination for this pos if user is retyping
+  if(nominations[posId]){ nominations[posId]=null; updateBadge(posId,null); updateProgress(); }
+
+  if(q.length < 2){ listEl.style.display='none'; return; }
+
+  // Exclude self + anyone already nominated in another position
+  const taken = new Set(Object.values(nominations).filter(Boolean).map(n=>n.member.id));
+  if(selfMember) taken.add(selfMember.id); // can only nominate self via checkbox
+
+  const matches = MEMBERS.filter(m =>
+    !taken.has(m.id) &&
+    (fullName(m).toLowerCase().includes(q) || m.first.toLowerCase().includes(q) || m.last.toLowerCase().includes(q))
+  ).slice(0,6);
+
+  if(!matches.length){
+    listEl.style.display='block';
+    listEl.innerHTML='<div class="no-results">No match — try a different spelling</div>';
+    return;
+  }
+  listEl.style.display='block';
+  listEl.innerHTML = matches.map(m=>`
+    <div class="result-item" onclick="pickNominee('${posId}',${m.id})">
+      <div class="result-avatar" style="background:${avatarColor(m.id)}">${initials(m)}</div>
+      <div><div class="result-name">${fullName(m)}</div><div class="result-sub">Member</div></div>
+    </div>`).join('');
+}
+
+function pickNominee(posId, memberId){
+  const member = MEMBERS.find(m=>m.id===memberId);
+  if(!member) return;
+  nominations[posId] = { member, isSelf: false };
+  document.getElementById('search-'+posId).value = fullName(member);
+  document.getElementById('search-'+posId).className = 'search-input ok';
+  document.getElementById('results-'+posId).style.display = 'none';
+  updateBadge(posId, member);
+  updateProgress();
+}
+
+function toggleSelfNom(posId){
+  const chk = document.getElementById('self-chk-'+posId);
+  const searchSec = document.getElementById('search-section-'+posId);
+
+  if(chk.checked){
+    // Remove self from any other position first
+    POSITIONS.forEach(p=>{
+      if(p.id !== posId && nominations[p.id] && nominations[p.id].isSelf){
+        document.getElementById('self-chk-'+p.id).checked = false;
+        nominations[p.id] = null;
+        updateBadge(p.id, null);
+        document.getElementById('search-section-'+p.id).style.display='block';
+      }
+    });
+    nominations[posId] = { member: selfMember, isSelf: true };
+    searchSec.style.display = 'none';
+    updateBadge(posId, selfMember, true);
+  } else {
+    nominations[posId] = null;
+    searchSec.style.display = 'block';
+    updateBadge(posId, null);
+  }
+  updateProgress();
+}
+
+function clearPosNom(posId){
+  nominations[posId] = null;
+  const chk = document.getElementById('self-chk-'+posId);
+  chk.checked = false;
+  document.getElementById('search-section-'+posId).style.display='block';
+  document.getElementById('search-'+posId).value='';
+  document.getElementById('search-'+posId).className='search-input';
+  document.getElementById('results-'+posId).style.display='none';
+  updateBadge(posId,null);
+  updateProgress();
+}
+
+function updateBadge(posId, member, isSelf){
+  const badge   = document.getElementById('sel-badge-'+posId);
+  const statusEl= document.getElementById('status-'+posId);
+  if(!member){
+    badge.classList.remove('show');
+    statusEl.textContent='Not filled'; statusEl.className='pos-status';
+    return;
+  }
+  document.getElementById('sel-av-'+posId).textContent = initials(member);
+  document.getElementById('sel-av-'+posId).style.background = avatarColor(member.id);
+  document.getElementById('sel-name-'+posId).textContent = fullName(member) + (isSelf?' (you)':'');
+  badge.classList.add('show');
+  statusEl.textContent='✓ Filled'; statusEl.className='pos-status done-tag';
+}
+
+function updateProgress(){
+  const filled = POSITIONS.filter(p=>nominations[p.id]).length;
+  document.getElementById('prog-fill').style.width = (filled/5*100)+'%';
+  document.getElementById('prog-count').textContent = filled;
+}
+
+// ══════════════════════════════════════════════════════════
+// SELF SEARCH (step 1)
+// ══════════════════════════════════════════════════════════
+function searchMembers(ctx, query){
+  const q = query.trim().toLowerCase();
+  const listEl  = document.getElementById('self-results');
+  const badgeEl = document.getElementById('self-sel-badge');
+  if(selfMember){ selfMember=null; badgeEl.classList.remove('show'); }
+  if(q.length<2){ listEl.style.display='none'; return; }
+
+  const matches = MEMBERS.filter(m=>
+    fullName(m).toLowerCase().includes(q)||m.first.toLowerCase().includes(q)||m.last.toLowerCase().includes(q)
+  ).slice(0,6);
+
+  listEl.style.display='block';
+  listEl.innerHTML = matches.length
+    ? matches.map(m=>`<div class="result-item" onclick="selectMember(${m.id})">
+        <div class="result-avatar" style="background:${avatarColor(m.id)}">${initials(m)}</div>
+        <div><div class="result-name">${fullName(m)}</div><div class="result-sub">YECOSA (YCI) 06 SET member</div></div>
+      </div>`).join('')
+    : '<div class="no-results">No member found — try a different spelling</div>';
+}
+
+function selectMember(id){
+  const m = MEMBERS.find(x=>x.id===id);
+  if(!m) return;
+  selfMember = m;
+  document.getElementById('self-search').value = fullName(m);
+  document.getElementById('self-search').className = 'search-input ok';
+  document.getElementById('self-results').style.display = 'none';
+  document.getElementById('self-av').textContent = initials(m);
+  document.getElementById('self-av').style.background = avatarColor(m.id);
+  document.getElementById('self-sel-name').textContent = fullName(m);
+  document.getElementById('self-sel-badge').classList.add('show');
+  hideMsg('verify-msg');
+}
+
+function clearSel(ctx){
+  selfMember=null;
+  document.getElementById('self-search').value='';
+  document.getElementById('self-search').className='search-input';
+  document.getElementById('self-results').style.display='none';
+  document.getElementById('self-sel-badge').classList.remove('show');
+  document.getElementById('self-search').focus();
+}
+
+// ══════════════════════════════════════════════════════════
+// PROCEED TO STEP 2
+// ══════════════════════════════════════════════════════════
+function proceedToNominate(){
+  if(!selfMember){ showMsg('verify-msg','error','Please search and select your name first.'); return; }
+  hideMsg('verify-msg');
+
+  // Set nominator bar
+  document.getElementById('nom-av').textContent = initials(selfMember);
+  document.getElementById('nom-av').style.background = avatarColor(selfMember.id);
+  document.getElementById('nom-name').textContent = fullName(selfMember);
+
+  // Reset all nominations
+  POSITIONS.forEach(p=>{ nominations[p.id]=null; });
+  buildPositionBlocks();
+  updateProgress();
+
+  setStep(2);
+  showScreen('nominate');
+}
+
+// ══════════════════════════════════════════════════════════
+// GO TO CONFIRM
+// ══════════════════════════════════════════════════════════
+function goToConfirm(){
+  hideMsg('form-msg');
+  const filled = POSITIONS.filter(p=>nominations[p.id]);
+  if(filled.length === 0){
+    showMsg('form-msg','error','Please nominate at least one position before continuing.');
+    return;
+  }
+
+  // Build summary
+  let html = `<div class="confirm-row"><span class="confirm-label">Nominated by</span><span class="confirm-value">${fullName(selfMember)}</span></div>`;
+  html += '<div class="confirm-section">Nominees</div>';
+  POSITIONS.forEach(pos=>{
+    const nom = nominations[pos.id];
+    html += `<div class="confirm-row">
+      <span class="confirm-label">${pos.label}</span>
+      <span class="confirm-value">${nom ? fullName(nom.member)+(nom.isSelf?' (you)':'') : '<span style="color:var(--slate);font-weight:400">Not nominated</span>'}</span>
+    </div>`;
+  });
+  document.getElementById('confirm-summary').innerHTML = html;
+
+  setStep(3);
+  showScreen('confirm');
+}
+
+// ══════════════════════════════════════════════════════════
+// SUBMIT
+// ══════════════════════════════════════════════════════════
+function submitNomination(){
+  const btn = document.getElementById('submit-btn');
+  btn.disabled=true; btn.textContent='Submitting…';
+
+  const payload = {
+    action:        'nominate',
+    nominatorName: fullName(selfMember),
+    nominatorId:   selfMember.id,
+    nominations:   {}
+  };
+  POSITIONS.forEach(pos=>{
+    const nom = nominations[pos.id];
+    payload.nominations[pos.id] = nom
+      ? { name: fullName(nom.member), id: nom.member.id, isSelf: nom.isSelf }
+      : null;
+  });
+
+  var params = '?action=nominate'
+    + '&nominatorName=' + encodeURIComponent(payload.nominatorName)
+    + '&nominatorId='   + encodeURIComponent(payload.nominatorId)
+    + '&noms='          + encodeURIComponent(JSON.stringify(payload.nominations));
+
+  // Image ping — bypasses CORS on all phones and browsers
+  var img = new Image();
+  img.onload = img.onerror = function(){
+    var ref = 'YCI-NOM-'+Math.random().toString(36).substring(2,8).toUpperCase();
+    document.getElementById('nom-ref').textContent = ref;
+    document.getElementById('step-indicator').style.display='none';
+    showScreen('success');
+  };
+  img.src = APPS_SCRIPT_URL + params;
+}
+</script>
+</body>
+</html>
+
+</body></html>
