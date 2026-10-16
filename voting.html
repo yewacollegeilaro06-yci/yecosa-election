@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YECOSA (YCI) 06 SET — Executive Election Ballot</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#1B5E2F;--green2:#236B39;--green3:#0F3D1E;
+  --yellow:#F0C830;--yellow2:#FDF6D8;--yellow3:#e6b800;
+  --khaki:#C8A84B;--bg:#F2EFE8;--white:#fff;
+  --slate:#5A6B5D;--slate2:#E2EAE4;
+  --red:#A03025;--red2:#FAEAE8;
+  --border:#C8D4CA;--text:#1A2A1E;
+  --success:#2E7D5A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:80px}
+
+/* ── HEADER ── */
+.header{background:var(--green);padding:28px 20px 24px;text-align:center}
+.header-pill{background:var(--yellow);color:var(--green);font-family:'Nunito',sans-serif;font-weight:900;font-size:11px;padding:3px 14px;border-radius:20px;display:inline-block;margin-bottom:8px;letter-spacing:.5px}
+.header h1{font-family:'Nunito',sans-serif;font-weight:900;font-size:22px;color:#fff;line-height:1.2;margin-bottom:4px}
+.header p{font-size:12px;color:rgba(255,255,255,0.5)}
+
+/* ── STEP INDICATOR ── */
+.steps{display:flex;align-items:center;justify-content:center;padding:20px 20px 4px;gap:0;max-width:400px;margin:0 auto}
+.step{display:flex;flex-direction:column;align-items:center;flex:1}
+.step-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:13px;border:2.5px solid var(--border);background:var(--white);color:var(--slate);transition:all .3s}
+.step-label{font-size:10px;color:var(--slate);margin-top:4px;font-weight:600;letter-spacing:.3px}
+.step-line{flex:1;height:2px;background:var(--border);margin-top:-18px;transition:background .3s}
+.step.active .step-circle{background:var(--green);border-color:var(--green);color:#fff}
+.step.active .step-label{color:var(--green);font-weight:700}
+.step.done .step-circle{background:var(--yellow);border-color:var(--yellow3);color:var(--green3)}
+.step.done .step-label{color:var(--success)}
+.step-line.done{background:var(--green)}
+.step-line.active{background:var(--border)}
+
+/* ── SCREENS ── */
+.screen{display:none;max-width:560px;margin:0 auto;padding:0 16px}
+.screen.active{display:block}
+
+/* ── VERIFY SCREEN ── */
+.verify-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:28px 24px;margin-top:16px;text-align:center}
+.verify-icon{font-size:40px;margin-bottom:12px}
+.verify-card h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:var(--green);margin-bottom:6px}
+.verify-card p{font-size:13px;color:var(--slate);line-height:1.6;margin-bottom:22px}
+.phone-input-wrap{position:relative;margin-bottom:14px}
+.phone-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;font-weight:600;color:var(--green);pointer-events:none}
+.phone-input{width:100%;border:2px solid var(--border);border-radius:10px;padding:13px 14px 13px 54px;font-family:'Inter',sans-serif;font-size:15px;outline:none;transition:border-color .2s;color:var(--text)}
+.phone-input:focus{border-color:var(--green)}
+.phone-input.error{border-color:var(--red)}
+.phone-input.ok{border-color:var(--success)}
+.msg{font-size:12.5px;padding:10px 14px;border-radius:8px;margin-bottom:14px;display:none;text-align:left}
+.msg.error{background:var(--red2);color:var(--red);display:block}
+.msg.success{background:rgba(46,125,90,0.1);color:var(--success);display:block}
+.btn{width:100%;padding:14px;border-radius:10px;border:none;font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;cursor:pointer;transition:all .2s}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{background:var(--green2)}
+.btn-green:disabled{background:var(--slate2);color:var(--slate);cursor:not-allowed}
+.btn-yellow{background:var(--yellow);color:var(--green3)}
+.btn-yellow:hover{background:var(--yellow3)}
+
+.privacy-note{display:flex;align-items:flex-start;gap:8px;background:var(--yellow2);border:1px solid rgba(200,168,75,0.4);border-radius:8px;padding:12px 14px;margin-top:16px;text-align:left}
+.privacy-note span{font-size:18px;flex-shrink:0}
+.privacy-note p{font-size:11.5px;color:#7a5e00;line-height:1.5}
+
+/* ── BALLOT SCREEN ── */
+.ballot-header{background:var(--white);border-radius:14px;border:1.5px solid var(--border);padding:16px 18px;margin-top:16px;display:flex;align-items:center;gap:14px}
+.ballot-header-icon{width:44px;height:44px;background:rgba(27,94,47,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.ballot-header-text h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--green)}
+.ballot-header-text p{font-size:11.5px;color:var(--slate);margin-top:2px}
+.voter-badge{background:rgba(27,94,47,0.08);border:1px solid rgba(27,94,47,0.2);border-radius:6px;font-size:10.5px;font-weight:600;color:var(--green);padding:2px 8px;display:inline-block;margin-top:5px}
+
+.position-card{background:var(--white);border-radius:14px;border:1.5px solid var(--border);padding:0;margin-top:14px;overflow:hidden}
+.pos-header{background:var(--green);padding:12px 18px;display:flex;align-items:center;gap:10px}
+.pos-number{width:24px;height:24px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:11px;color:var(--green3);flex-shrink:0}
+.pos-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:#fff}
+.pos-tag{margin-left:auto;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7)}
+.nominees{padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.nominee-label{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;border:1.5px solid var(--border);cursor:pointer;transition:all .15s;position:relative}
+.nominee-label:hover{border-color:var(--green);background:rgba(27,94,47,0.04)}
+.nominee-label.selected{border-color:var(--green);background:rgba(27,94,47,0.07)}
+.nominee-label input[type=radio]{position:absolute;opacity:0;pointer-events:none}
+.nominee-avatar{width:36px;height:36px;border-radius:50%;background:var(--slate2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;font-weight:700;color:var(--slate);font-family:'Nunito',sans-serif;transition:all .15s}
+.nominee-label.selected .nominee-avatar{background:var(--green);color:#fff}
+.nominee-name{flex:1;font-weight:600;font-size:14px;color:var(--text)}
+.nominee-label.selected .nominee-name{color:var(--green);font-weight:700}
+.nominee-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent;transition:all .15s;flex-shrink:0}
+.nominee-label.selected .nominee-check{background:var(--green);border-color:var(--green);color:#fff}
+.abstain-row{padding:6px 16px 14px}
+.abstain-label{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;border:1.5px dashed var(--border);cursor:pointer;transition:all .15s}
+.abstain-label:hover{border-color:var(--slate);background:rgba(90,107,93,0.05)}
+.abstain-label.selected{border-color:var(--slate);background:rgba(90,107,93,0.08)}
+.abstain-label input[type=radio]{position:absolute;opacity:0;pointer-events:none}
+.abstain-label span{font-size:12.5px;color:var(--slate);font-style:italic}
+.abstain-label.selected span{color:var(--text)}
+
+/* ── SUBMIT FOOTER ── */
+.submit-footer{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1.5px solid var(--border);padding:14px 16px;z-index:100}
+.submit-inner{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.progress-text{flex:1}
+.progress-count{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--green)}
+.progress-label{font-size:11px;color:var(--slate);margin-top:1px}
+.progress-bar-wrap{height:4px;background:var(--slate2);border-radius:2px;margin-top:5px;max-width:120px}
+.progress-bar-fill{height:100%;background:var(--green);border-radius:2px;transition:width .3s}
+.submit-btn{flex-shrink:0;padding:12px 22px;border-radius:10px;border:none;font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;cursor:pointer;background:var(--green);color:#fff;transition:all .2s}
+.submit-btn:hover{background:var(--green2)}
+.submit-btn:disabled{background:var(--slate2);color:var(--slate);cursor:not-allowed}
+
+/* ── CONFIRM SCREEN ── */
+.confirm-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:24px 22px;margin-top:16px}
+.confirm-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;color:var(--green);margin-bottom:4px}
+.confirm-sub{font-size:12.5px;color:var(--slate);margin-bottom:20px;line-height:1.5}
+.confirm-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--slate2)}
+.confirm-row:last-child{border-bottom:none}
+.confirm-pos{font-size:12px;color:var(--slate);font-weight:600}
+.confirm-choice{font-size:13.5px;font-weight:700;color:var(--green);text-align:right;max-width:60%}
+.confirm-choice.abstain{color:var(--slate);font-style:italic;font-weight:400}
+.confirm-btns{display:flex;gap:10px;margin-top:20px}
+.btn-outline{flex:1;padding:13px;border-radius:10px;border:2px solid var(--border);background:var(--white);font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--slate);cursor:pointer}
+.btn-outline:hover{border-color:var(--green);color:var(--green)}
+.btn-submit{flex:2;padding:13px;border-radius:10px;border:none;background:var(--green);color:#fff;font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;cursor:pointer;transition:background .2s}
+.btn-submit:hover{background:var(--green2)}
+
+/* ── SUCCESS SCREEN ── */
+.success-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:40px 24px;margin-top:16px;text-align:center}
+.success-icon{font-size:56px;margin-bottom:16px}
+.success-card h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:22px;color:var(--green);margin-bottom:8px}
+.success-card p{font-size:13.5px;color:var(--slate);line-height:1.7;margin-bottom:20px}
+.success-ref{background:rgba(27,94,47,0.07);border-radius:10px;padding:14px 18px;margin-bottom:24px;display:inline-block;min-width:220px}
+.success-ref .ref-label{font-size:10.5px;color:var(--slate);font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.success-ref .ref-code{font-family:monospace;font-size:16px;font-weight:700;color:var(--green);letter-spacing:1px}
+.results-link{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--yellow2);border:1.5px solid rgba(200,168,75,0.4);border-radius:12px;text-decoration:none;color:inherit;margin-bottom:10px}
+.results-link:hover{background:#f7edae}
+.results-link-icon{font-size:24px;flex-shrink:0}
+.results-link-text .rl-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--green)}
+.results-link-text .rl-sub{font-size:11.5px;color:var(--slate);margin-top:2px}
+.results-link-arrow{font-size:18px;color:var(--khaki);margin-left:auto}
+
+/* ── ALREADY-VOTED SCREEN ── */
+.voted-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:36px 24px;margin-top:16px;text-align:center}
+.voted-icon{font-size:48px;margin-bottom:14px}
+.voted-card h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:var(--green);margin-bottom:8px}
+.voted-card p{font-size:13px;color:var(--slate);line-height:1.7;margin-bottom:20px}
+
+/* ── UTIL ── */
+.mt4{margin-top:4px}
+.mt8{margin-top:8px}
+.mt16{margin-top:16px}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-pill">YECOSA (YCI) 06 SET</div>
+  <h1>Executive Election Ballot 2026</h1>
+  <p>Yewa College, Ilaro · Class of 2006 · Official Election</p>
+</div>
+
+<!-- STEP INDICATOR -->
+<div class="steps" id="step-indicator">
+  <div class="step active" id="step-1">
+    <div class="step-circle">1</div>
+    <div class="step-label">Verify</div>
+  </div>
+  <div class="step-line" id="line-1"></div>
+  <div class="step active" id="step-2" style="opacity:.4">
+    <div class="step-circle" style="opacity:.7">2</div>
+    <div class="step-label">Vote</div>
+  </div>
+  <div class="step-line" id="line-2"></div>
+  <div class="step" id="step-3" style="opacity:.4">
+    <div class="step-circle" style="opacity:.7">3</div>
+    <div class="step-label">Confirm</div>
+  </div>
+</div>
+
+<!-- ════════ SCREEN 1: VERIFY ════════ -->
+<div class="screen active" id="screen-verify">
+  <div class="verify-card">
+    <div class="verify-icon">📱</div>
+    <h2>Verify Your Identity</h2>
+    <p>Enter your registered phone number to access the ballot.<br>Only registered YECOSA (YCI) 06 SET members may vote.</p>
+
+    <div class="phone-input-wrap">
+      <div class="phone-prefix">+234</div>
+      <input class="phone-input" id="phone-input" type="tel" placeholder="8XXXXXXXXX" maxlength="13"
+             oninput="onPhoneInput()" onkeydown="if(event.key==='Enter')verifyPhone()">
+    </div>
+    <div class="msg" id="verify-msg"></div>
+    <button class="btn btn-green" id="verify-btn" onclick="verifyPhone()" disabled>Verify &amp; Enter Ballot</button>
+
+    <div class="privacy-note">
+      <span>🔒</span>
+      <p>Your vote is anonymous. Your phone number is only used to confirm you are a registered member and prevent double-voting. No personal data is stored beyond this session.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ SCREEN 2: BALLOT ════════ -->
+<div class="screen" id="screen-ballot">
+
+  <div class="ballot-header">
+    <div class="ballot-header-icon">🗳</div>
+    <div class="ballot-header-text">
+      <h3>Official Ballot — 5 Executive Positions</h3>
+      <p>Select one candidate per position. You may abstain from any.</p>
+      <div class="voter-badge" id="voter-badge">Verified Member</div>
+    </div>
+  </div>
+
+  <!-- POSITIONS INJECTED BY JS -->
+  <div id="ballot-positions"></div>
+
+  <div style="height:80px"></div><!-- spacer for fixed footer -->
+
+  <!-- SUBMIT FOOTER -->
+  <div class="submit-footer">
+    <div class="submit-inner">
+      <div class="progress-text">
+        <div class="progress-count"><span id="sel-count">0</span> of 5 selected</div>
+        <div class="progress-label" id="sel-label">Select all 5 positions to continue</div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:0%"></div></div>
+      </div>
+      <button class="submit-btn" id="submit-btn" onclick="goToConfirm()" disabled>Review Ballot →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ SCREEN 3: CONFIRM ════════ -->
+<div class="screen" id="screen-confirm">
+  <div class="confirm-card">
+    <div class="confirm-title">⚖️ Review Your Choices</div>
+    <div class="confirm-sub">Please review your selections carefully. You cannot change your vote after submitting.</div>
+    <div id="confirm-rows"></div>
+    <div class="confirm-btns">
+      <button class="btn-outline" onclick="goBack()">← Go Back</button>
+      <button class="btn-submit" onclick="submitVote()">Submit Vote ✓</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ SCREEN 4: SUCCESS ════════ -->
+<div class="screen" id="screen-success">
+  <div class="success-card">
+    <div class="success-icon">🎉</div>
+    <h2>Vote Cast Successfully!</h2>
+    <p>Your vote has been recorded. Thank you for participating in the YECOSA (YCI) 06 SET Executive Election 2026.</p>
+    <div class="success-ref">
+      <div class="ref-label">Your Vote Reference</div>
+      <div class="ref-code" id="vote-ref">—</div>
+    </div>
+    <a class="results-link" href="YECOSA_Results.html" target="_blank">
+      <div class="results-link-icon">📊</div>
+      <div class="results-link-text">
+        <div class="rl-title">View Live Election Results</div>
+        <div class="rl-sub">See real-time vote counts and leading candidates</div>
+      </div>
+      <div class="results-link-arrow">→</div>
+    </a>
+    <p style="font-size:11.5px;color:var(--slate)">Polls close Wednesday 28 October 2026 at 11:59 PM.</p>
+  </div>
+</div>
+
+<!-- ════════ SCREEN 5: ALREADY VOTED ════════ -->
+<div class="screen" id="screen-voted">
+  <div class="voted-card">
+    <div class="voted-icon">✅</div>
+    <h2>You Have Already Voted</h2>
+    <p>Our records show that a vote has been cast from this device or phone number. Each member may only vote once.</p>
+    <p>If you believe this is an error, please contact the election committee.</p>
+    <a class="results-link" href="YECOSA_Results.html" target="_blank" style="margin-top:20px;display:flex">
+      <div class="results-link-icon">📊</div>
+      <div class="results-link-text">
+        <div class="rl-title">View Live Election Results</div>
+        <div class="rl-sub">See how the election is unfolding</div>
+      </div>
+      <div class="results-link-arrow">→</div>
+    </a>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// MEMBER LIST — replace placeholder numbers with real ones
+// Format: normalised 11-digit Nigerian numbers (08XXXXXXXXX)
+// ══════════════════════════════════════════════════════════
+const MEMBERS = [
+  '+2348000000001','+2348000000002','+2348000000003','+2348000000004','+2348000000005',
+  '+2348000000006','+2348000000007','+2348000000008','+2348000000009','+2348000000010',
+  '+2348000000011','+2348000000012','+2348000000013','+2348000000014','+2348000000015',
+  '+2348000000016','+2348000000017','+2348000000018','+2348000000019','+2348000000020',
+  '+2348000000021','+2348000000022','+2348000000023','+2348000000024','+2348000000025',
+  '+2348000000026','+2348000000027','+2348000000028','+2348000000029','+2348000000030',
+  '+2348000000031','+2348000000032','+2348000000033','+2348000000034','+2348000000035',
+  '+2348000000036','+2348000000037','+2348000000038','+2348000000039','+2348000000040',
+  '+2348000000041','+2348000000042','+2348000000043','+2348000000044','+2348000000045',
+  '+2348000000046','+2348000000047','+2348000000048','+2348000000049','+2348000000050',
+  '+2348000000051','+2348000000052','+2348000000053','+2348000000054','+2348000000055',
+  '+2348000000056','+2348000000057','+2348000000058','+2348000000059','+2348000000060',
+  '+2348000000061','+2348000000062','+2348000000063','+2348000000064','+2348000000065',
+  '+2348000000066','+2348000000067','+2348000000068','+2348000000069','+2348000000070',
+  '+2348000000071','+2348000000072','+2348000000073','+2348000000074','+2348000000075',
+  '+2348000000076','+2348000000077','+2348000000078','+2348000000079','+2348000000080',
+  '+2348000000081','+2348000000082','+2348000000083','+2348000000084','+2348000000085',
+  '+2348000000086','+2348000000087','+2348000000088','+2348000000089','+2348000000090'
+];
+
+// ══════════════════════════════════════════════════════════
+// POSITIONS & NOMINEES — update with real candidate names
+// ══════════════════════════════════════════════════════════
+const POSITIONS = [
+  {
+    id: 'president',
+    title: 'President',
+    emoji: '🏛',
+    nominees: [
+      { id: 'p1', name: 'Nominee A — President' },
+      { id: 'p2', name: 'Nominee B — President' },
+      { id: 'p3', name: 'Nominee C — President' },
+    ]
+  },
+  {
+    id: 'vp',
+    title: 'Vice President',
+    emoji: '🤝',
+    nominees: [
+      { id: 'v1', name: 'Nominee A — Vice President' },
+      { id: 'v2', name: 'Nominee B — Vice President' },
+      { id: 'v3', name: 'Nominee C — Vice President' },
+    ]
+  },
+  {
+    id: 'treasurer',
+    title: 'Treasurer',
+    emoji: '💰',
+    nominees: [
+      { id: 't1', name: 'Nominee A — Treasurer' },
+      { id: 't2', name: 'Nominee B — Treasurer' },
+      { id: 't3', name: 'Nominee C — Treasurer' },
+    ]
+  },
+  {
+    id: 'finsec',
+    title: 'Financial Secretary',
+    emoji: '📒',
+    nominees: [
+      { id: 'f1', name: 'Nominee A — Financial Secretary' },
+      { id: 'f2', name: 'Nominee B — Financial Secretary' },
+      { id: 'f3', name: 'Nominee C — Financial Secretary' },
+    ]
+  },
+  {
+    id: 'welfare',
+    title: 'Welfare Officer',
+    emoji: '❤️',
+    nominees: [
+      { id: 'w1', name: 'Nominee A — Welfare Officer' },
+      { id: 'w2', name: 'Nominee B — Welfare Officer' },
+      { id: 'w3', name: 'Nominee C — Welfare Officer' },
+    ]
+  }
+];
+
+// ══════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════
+let verifiedPhone = null;
+const selections = {}; // { positionId: nomineeId | 'abstain' }
+const LS_VOTED    = 'yci_voted_2026';
+const LS_PHONES   = 'yci_voted_phones_2026';
+const LS_VOTES    = 'yci_votes_2026';
+
+// ══════════════════════════════════════════════════════════
+// NORMALISE PHONE
+// ══════════════════════════════════════════════════════════
+function normalise(raw) {
+  let d = raw.replace(/\D/g, '');
+  if (d.startsWith('234') && d.length >= 13) d = d.slice(3);  // strip 234 prefix
+  if (d.startsWith('0') && d.length === 11) d = d.slice(1);   // strip leading 0 → 10 digits
+  if (d.length !== 10) return null;
+  return '+234' + d;
+}
+
+// ══════════════════════════════════════════════════════════
+// PHONE INPUT HANDLER
+// ══════════════════════════════════════════════════════════
+function onPhoneInput() {
+  const input = document.getElementById('phone-input');
+  const btn   = document.getElementById('verify-btn');
+  const msg   = document.getElementById('verify-msg');
+  input.classList.remove('error', 'ok');
+  msg.className = 'msg';
+  msg.textContent = '';
+  // enable verify if there's something to check
+  const raw = input.value.trim();
+  btn.disabled = raw.length < 8;
+}
+
+// ══════════════════════════════════════════════════════════
+// VERIFY PHONE
+// ══════════════════════════════════════════════════════════
+function verifyPhone() {
+  const input  = document.getElementById('phone-input');
+  const msg    = document.getElementById('verify-msg');
+  const raw    = input.value.trim();
+  const norm   = normalise(raw);
+
+  if (!norm) {
+    setMsg('error', '⚠️ Invalid phone number format. Enter your 10-digit number (e.g. 0812 345 6789).');
+    input.classList.add('error');
+    return;
+  }
+
+  // Check device lock first
+  let votedDevice = false;
+  try { votedDevice = localStorage.getItem(LS_VOTED) === '1'; } catch(e) {}
+  if (votedDevice) {
+    showScreen('voted');
+    return;
+  }
+
+  // Check if phone already voted
+  let votedPhones = [];
+  try { votedPhones = JSON.parse(localStorage.getItem(LS_PHONES) || '[]'); } catch(e) {}
+  if (votedPhones.includes(norm)) {
+    showScreen('voted');
+    return;
+  }
+
+  // Check membership
+  if (!MEMBERS.includes(norm)) {
+    setMsg('error', '🚫 This phone number is not on the registered member list. Please check the number or contact the election committee.');
+    input.classList.add('error');
+    return;
+  }
+
+  // ✅ Verified
+  verifiedPhone = norm;
+  input.classList.add('ok');
+  setMsg('success', '✅ Verified! Loading your ballot...');
+  setTimeout(() => {
+    buildBallot();
+    showScreen('ballot');
+    setStep(2);
+  }, 900);
+}
+
+function setMsg(type, text) {
+  const msg = document.getElementById('verify-msg');
+  msg.className = 'msg ' + type;
+  msg.textContent = text;
+}
+
+// ══════════════════════════════════════════════════════════
+// BUILD BALLOT
+// ══════════════════════════════════════════════════════════
+function buildBallot() {
+  const badge = document.getElementById('voter-badge');
+  badge.textContent = 'Verified: ' + verifiedPhone;
+
+  const container = document.getElementById('ballot-positions');
+  container.innerHTML = '';
+
+  POSITIONS.forEach((pos, idx) => {
+    const card = document.createElement('div');
+    card.className = 'position-card';
+    card.id = 'pos-card-' + pos.id;
+
+    let nomHtml = '';
+    pos.nominees.forEach(nom => {
+      const initials = nom.name.split(' ').filter(w => /^[A-Z]/.test(w)).slice(0,2).map(w => w[0]).join('') || nom.name[0];
+      nomHtml += `
+        <label class="nominee-label" id="lbl-${pos.id}-${nom.id}" onclick="pickNominee('${pos.id}','${nom.id}',this)">
+          <input type="radio" name="${pos.id}" value="${nom.id}">
+          <div class="nominee-avatar" id="av-${pos.id}-${nom.id}">${initials}</div>
+          <div class="nominee-name">${nom.name}</div>
+          <div class="nominee-check" id="chk-${pos.id}-${nom.id}">✓</div>
+        </label>`;
+    });
+
+    card.innerHTML = `
+      <div class="pos-header">
+        <div class="pos-number">${idx+1}</div>
+        <div class="pos-title">${pos.emoji} ${pos.title}</div>
+        <div class="pos-tag" id="tag-${pos.id}">Not selected</div>
+      </div>
+      <div class="nominees">${nomHtml}</div>
+      <div class="abstain-row">
+        <label class="abstain-label" id="lbl-${pos.id}-abstain" onclick="pickNominee('${pos.id}','abstain',this)">
+          <input type="radio" name="${pos.id}" value="abstain">
+          <span>— Abstain from this position</span>
+        </label>
+      </div>`;
+    container.appendChild(card);
+  });
+
+  updateSubmitStatus();
+}
+
+// ══════════════════════════════════════════════════════════
+// PICK NOMINEE
+// ══════════════════════════════════════════════════════════
+function pickNominee(posId, nomId, clickedLabel) {
+  // De-select all nominees in this position
+  const pos = POSITIONS.find(p => p.id === posId);
+  pos.nominees.forEach(nom => {
+    const lbl = document.getElementById('lbl-' + posId + '-' + nom.id);
+    if (lbl) lbl.classList.remove('selected');
+  });
+  const abstainLbl = document.getElementById('lbl-' + posId + '-abstain');
+  if (abstainLbl) abstainLbl.classList.remove('selected');
+
+  // Select clicked
+  clickedLabel.classList.add('selected');
+  selections[posId] = nomId;
+
+  // Update tag
+  const tag = document.getElementById('tag-' + posId);
+  if (nomId === 'abstain') {
+    tag.textContent = 'Abstaining';
+    tag.style.background = 'rgba(255,255,255,0.1)';
+  } else {
+    const nom = pos.nominees.find(n => n.id === nomId);
+    tag.textContent = '✓ Selected';
+    tag.style.background = 'rgba(240,200,48,0.25)';
+    tag.style.color = '#F0C830';
+  }
+
+  // Highlight card
+  const card = document.getElementById('pos-card-' + posId);
+  card.style.borderColor = '#236B39';
+
+  updateSubmitStatus();
+}
+
+// ══════════════════════════════════════════════════════════
+// UPDATE SUBMIT STATUS
+// ══════════════════════════════════════════════════════════
+function updateSubmitStatus() {
+  const count = Object.keys(selections).length;
+  document.getElementById('sel-count').textContent = count;
+  document.getElementById('progress-fill').style.width = (count / 5 * 100) + '%';
+
+  const remaining = 5 - count;
+  if (remaining === 0) {
+    document.getElementById('sel-label').textContent = 'All positions selected — ready to review!';
+    document.getElementById('submit-btn').disabled = false;
+  } else {
+    document.getElementById('sel-label').textContent = remaining + ' position' + (remaining > 1 ? 's' : '') + ' remaining';
+    document.getElementById('submit-btn').disabled = true;
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// GO TO CONFIRM
+// ══════════════════════════════════════════════════════════
+function goToConfirm() {
+  // Build confirm rows
+  const rows = document.getElementById('confirm-rows');
+  rows.innerHTML = '';
+  POSITIONS.forEach(pos => {
+    const selId = selections[pos.id];
+    let choiceText, isAbstain = false;
+    if (selId === 'abstain') {
+      choiceText = 'Abstaining';
+      isAbstain = true;
+    } else {
+      const nom = pos.nominees.find(n => n.id === selId);
+      choiceText = nom ? nom.name : '—';
+    }
+    rows.innerHTML += `
+      <div class="confirm-row">
+        <div class="confirm-pos">${pos.emoji} ${pos.title}</div>
+        <div class="confirm-choice ${isAbstain ? 'abstain' : ''}">${choiceText}</div>
+      </div>`;
+  });
+
+  showScreen('confirm');
+  setStep(3);
+}
+
+function goBack() {
+  showScreen('ballot');
+  setStep(2);
+}
+
+// ══════════════════════════════════════════════════════════
+// APPS SCRIPT WEB APP URL
+// ══════════════════════════════════════════════════════════
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxql8IQ_VeHxGf69e6Q1AJQWtKhFw2oxdXv7lZAnhLzoXdv4rlUNncaaJ2DpZDr0nGljA/exec';
+const ELECTION_OPEN  = new Date('2026-10-26T00:00:00');
+const ELECTION_CLOSE = new Date('2026-10-28T23:59:00');
+
+// ══════════════════════════════════════════════════════════
+// SUBMIT VOTE
+// ══════════════════════════════════════════════════════════
+function submitVote() {
+  // Device lock immediately so double-tap can't submit twice
+  try {
+    localStorage.setItem(LS_VOTED, '1');
+    let votedPhones = [];
+    try { votedPhones = JSON.parse(localStorage.getItem(LS_PHONES) || '[]'); } catch(e) {}
+    if (!votedPhones.includes(verifiedPhone)) votedPhones.push(verifiedPhone);
+    localStorage.setItem(LS_PHONES, JSON.stringify(votedPhones));
+  } catch(e) {}
+
+  // Generate reference
+  const ref = 'YCI26-' + Math.random().toString(36).substring(2,8).toUpperCase();
+  document.getElementById('vote-ref').textContent = ref;
+
+  // Show success screen immediately
+  showScreen('success');
+  document.getElementById('step-indicator').style.display = 'none';
+
+  // Send to Google Sheets via image ping — no CORS issues on any device
+  var params = '?action=vote'
+    + '&phone='     + encodeURIComponent(verifiedPhone)
+    + '&president=' + encodeURIComponent(selections['president'] || 'abstain')
+    + '&vp='        + encodeURIComponent(selections['vp']        || 'abstain')
+    + '&treasurer=' + encodeURIComponent(selections['treasurer'] || 'abstain')
+    + '&finsec='    + encodeURIComponent(selections['finsec']    || 'abstain')
+    + '&welfare='   + encodeURIComponent(selections['welfare']   || 'abstain');
+  var img = new Image();
+  img.src = APPS_SCRIPT_URL + params;
+}
+
+// ══════════════════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════════════════
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+}
+
+function setStep(n) {
+  for (let i = 1; i <= 3; i++) {
+    const step = document.getElementById('step-' + i);
+    step.style.opacity = '1';
+    if (i < n) {
+      step.className = 'step done';
+      step.querySelector('.step-circle').style.opacity = '1';
+    } else if (i === n) {
+      step.className = 'step active';
+      step.querySelector('.step-circle').style.opacity = '1';
+    } else {
+      step.className = 'step';
+      step.style.opacity = '.4';
+    }
+  }
+  for (let i = 1; i <= 2; i++) {
+    const line = document.getElementById('line-' + i);
+    line.className = 'step-line ' + (i < n ? 'done' : '');
+  }
+}
+
+// ══════════════════════════════════════════════════════════
+// INIT — check date and device lock on load
+// ══════════════════════════════════════════════════════════
+(function init() {
+  const now = new Date();
+
+  // Not yet open
+  if (now < ELECTION_OPEN) {
+    document.getElementById('step-indicator').style.display = 'none';
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const b = document.createElement('div');
+    b.style.cssText = 'max-width:560px;margin:32px auto;padding:0 16px;text-align:center';
+    b.innerHTML = '<div style="background:#fff;border-radius:16px;border:1.5px solid #C8D4CA;padding:36px 24px"><div style="font-size:44px;margin-bottom:14px">🗓</div><h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:20px;color:#1B5E2F;margin-bottom:8px">Voting Not Yet Open</h2><p style="font-size:13.5px;color:#5A6B5D;line-height:1.7">Voting opens on <strong>Monday 26 October 2026</strong> and closes <strong>Wednesday 28 October 2026 at 11:59 PM</strong>.<br><br>Please come back then to cast your vote.</p></div>';
+    document.body.appendChild(b);
+    return;
+  }
+
+  // Closed
+  if (now > ELECTION_CLOSE) {
+    document.getElementById('step-indicator').style.display = 'none';
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const b = document.createElement('div');
+    b.style.cssText = 'max-width:560px;margin:32px auto;padding:0 16px;text-align:center';
+    b.innerHTML = '<div style="background:#fff;border-radius:16px;border:1.5px solid #C8D4CA;padding:36px 24px"><div style="font-size:44px;margin-bottom:14px">🔒</div><h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:20px;color:#A03025;margin-bottom:8px">Voting Closed</h2><p style="font-size:13.5px;color:#5A6B5D;line-height:1.7">The election closed on <strong>Wednesday 28 October 2026 at 11:59 PM</strong>.<br><br>Results will be announced by the election committee.</p></div>';
+    document.body.appendChild(b);
+    return;
+  }
+
+  // Check device lock
+  let votedDevice = false;
+  try { votedDevice = localStorage.getItem(LS_VOTED) === '1'; } catch(e) {}
+  if (votedDevice) {
+    showScreen('voted');
+    document.getElementById('step-indicator').style.display = 'none';
+  }
+})();
+</script>
+</body>
+</html>
