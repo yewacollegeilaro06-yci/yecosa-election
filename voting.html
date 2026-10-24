@@ -17,14 +17,10 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:80px}
-
-/* ── HEADER ── */
 .header{background:var(--green);padding:28px 20px 24px;text-align:center}
 .header-pill{background:var(--yellow);color:var(--green);font-family:'Nunito',sans-serif;font-weight:900;font-size:11px;padding:3px 14px;border-radius:20px;display:inline-block;margin-bottom:8px;letter-spacing:.5px}
 .header h1{font-family:'Nunito',sans-serif;font-weight:900;font-size:22px;color:#fff;line-height:1.2;margin-bottom:4px}
 .header p{font-size:12px;color:rgba(255,255,255,0.5)}
-
-/* ── STEP INDICATOR ── */
 .steps{display:flex;align-items:center;justify-content:center;padding:20px 20px 4px;gap:0;max-width:400px;margin:0 auto}
 .step{display:flex;flex-direction:column;align-items:center;flex:1}
 .step-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:13px;border:2.5px solid var(--border);background:var(--white);color:var(--slate);transition:all .3s}
@@ -35,23 +31,29 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .step.done .step-circle{background:var(--yellow);border-color:var(--yellow3);color:var(--green3)}
 .step.done .step-label{color:var(--success)}
 .step-line.done{background:var(--green)}
-.step-line.active{background:var(--border)}
-
-/* ── SCREENS ── */
 .screen{display:none;max-width:560px;margin:0 auto;padding:0 16px}
 .screen.active{display:block}
-
-/* ── VERIFY SCREEN ── */
 .verify-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:28px 24px;margin-top:16px;text-align:center}
 .verify-icon{font-size:40px;margin-bottom:12px}
 .verify-card h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:var(--green);margin-bottom:6px}
 .verify-card p{font-size:13px;color:var(--slate);line-height:1.6;margin-bottom:22px}
-.phone-input-wrap{position:relative;margin-bottom:14px}
-.phone-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;font-weight:600;color:var(--green);pointer-events:none}
-.phone-input{width:100%;border:2px solid var(--border);border-radius:10px;padding:13px 14px 13px 54px;font-family:'Inter',sans-serif;font-size:15px;outline:none;transition:border-color .2s;color:var(--text)}
-.phone-input:focus{border-color:var(--green)}
-.phone-input.error{border-color:var(--red)}
-.phone-input.ok{border-color:var(--success)}
+.search-wrap{position:relative;margin-bottom:6px;text-align:left}
+.search-input{width:100%;border:2px solid var(--border);border-radius:10px;padding:12px 14px 12px 40px;font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:border-color .2s;color:var(--text);background:var(--white)}
+.search-input:focus{border-color:var(--green)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:15px;pointer-events:none}
+.results-list{border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:8px;display:none;box-shadow:0 4px 12px rgba(0,0,0,0.08);text-align:left}
+.result-item{padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--slate2);display:flex;align-items:center;gap:10px;transition:background .15s;background:var(--white)}
+.result-item:last-child{border-bottom:none}
+.result-item:hover{background:rgba(27,94,47,0.05)}
+.result-avatar{width:32px;height:32px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;flex-shrink:0}
+.result-name{font-weight:600;font-size:13px;color:var(--text)}
+.result-sub{font-size:11px;color:var(--slate);margin-top:1px}
+.no-results{padding:12px 14px;font-size:13px;color:var(--slate);text-align:center;background:var(--white)}
+.sel-badge{display:none;align-items:center;gap:10px;background:rgba(27,94,47,0.07);border:1.5px solid rgba(27,94,47,0.2);border-radius:9px;padding:10px 14px;margin-bottom:8px;text-align:left}
+.sel-badge.show{display:flex}
+.sel-badge .av{width:32px;height:32px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;flex-shrink:0}
+.sel-badge .nm{font-weight:700;font-size:13px;color:var(--green);flex:1}
+.sel-badge .chg{font-size:11.5px;color:var(--green);font-weight:600;cursor:pointer;text-decoration:underline;white-space:nowrap}
 .msg{font-size:12.5px;padding:10px 14px;border-radius:8px;margin-bottom:14px;display:none;text-align:left}
 .msg.error{background:var(--red2);color:var(--red);display:block}
 .msg.success{background:rgba(46,125,90,0.1);color:var(--success);display:block}
@@ -59,20 +61,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .btn-green{background:var(--green);color:#fff}
 .btn-green:hover{background:var(--green2)}
 .btn-green:disabled{background:var(--slate2);color:var(--slate);cursor:not-allowed}
-.btn-yellow{background:var(--yellow);color:var(--green3)}
-.btn-yellow:hover{background:var(--yellow3)}
-
 .privacy-note{display:flex;align-items:flex-start;gap:8px;background:var(--yellow2);border:1px solid rgba(200,168,75,0.4);border-radius:8px;padding:12px 14px;margin-top:16px;text-align:left}
 .privacy-note span{font-size:18px;flex-shrink:0}
 .privacy-note p{font-size:11.5px;color:#7a5e00;line-height:1.5}
-
-/* ── BALLOT SCREEN ── */
 .ballot-header{background:var(--white);border-radius:14px;border:1.5px solid var(--border);padding:16px 18px;margin-top:16px;display:flex;align-items:center;gap:14px}
 .ballot-header-icon{width:44px;height:44px;background:rgba(27,94,47,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 .ballot-header-text h3{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--green)}
 .ballot-header-text p{font-size:11.5px;color:var(--slate);margin-top:2px}
 .voter-badge{background:rgba(27,94,47,0.08);border:1px solid rgba(27,94,47,0.2);border-radius:6px;font-size:10.5px;font-weight:600;color:var(--green);padding:2px 8px;display:inline-block;margin-top:5px}
-
 .position-card{background:var(--white);border-radius:14px;border:1.5px solid var(--border);padding:0;margin-top:14px;overflow:hidden}
 .pos-header{background:var(--green);padding:12px 18px;display:flex;align-items:center;gap:10px}
 .pos-number{width:24px;height:24px;background:var(--yellow);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:900;font-size:11px;color:var(--green3);flex-shrink:0}
@@ -93,11 +89,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .abstain-label{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;border:1.5px dashed var(--border);cursor:pointer;transition:all .15s}
 .abstain-label:hover{border-color:var(--slate);background:rgba(90,107,93,0.05)}
 .abstain-label.selected{border-color:var(--slate);background:rgba(90,107,93,0.08)}
-.abstain-label input[type=radio]{position:absolute;opacity:0;pointer-events:none}
 .abstain-label span{font-size:12.5px;color:var(--slate);font-style:italic}
 .abstain-label.selected span{color:var(--text)}
-
-/* ── SUBMIT FOOTER ── */
 .submit-footer{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1.5px solid var(--border);padding:14px 16px;z-index:100}
 .submit-inner{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:14px}
 .progress-text{flex:1}
@@ -108,8 +101,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .submit-btn{flex-shrink:0;padding:12px 22px;border-radius:10px;border:none;font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;cursor:pointer;background:var(--green);color:#fff;transition:all .2s}
 .submit-btn:hover{background:var(--green2)}
 .submit-btn:disabled{background:var(--slate2);color:var(--slate);cursor:not-allowed}
-
-/* ── CONFIRM SCREEN ── */
 .confirm-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:24px 22px;margin-top:16px}
 .confirm-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;color:var(--green);margin-bottom:4px}
 .confirm-sub{font-size:12.5px;color:var(--slate);margin-bottom:20px;line-height:1.5}
@@ -123,8 +114,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .btn-outline:hover{border-color:var(--green);color:var(--green)}
 .btn-submit{flex:2;padding:13px;border-radius:10px;border:none;background:var(--green);color:#fff;font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;cursor:pointer;transition:background .2s}
 .btn-submit:hover{background:var(--green2)}
-
-/* ── SUCCESS SCREEN ── */
 .success-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:40px 24px;margin-top:16px;text-align:center}
 .success-icon{font-size:56px;margin-bottom:16px}
 .success-card h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:22px;color:var(--green);margin-bottom:8px}
@@ -138,36 +127,27 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 .results-link-text .rl-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--green)}
 .results-link-text .rl-sub{font-size:11.5px;color:var(--slate);margin-top:2px}
 .results-link-arrow{font-size:18px;color:var(--khaki);margin-left:auto}
-
-/* ── ALREADY-VOTED SCREEN ── */
 .voted-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:36px 24px;margin-top:16px;text-align:center}
 .voted-icon{font-size:48px;margin-bottom:14px}
 .voted-card h2{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:var(--green);margin-bottom:8px}
 .voted-card p{font-size:13px;color:var(--slate);line-height:1.7;margin-bottom:20px}
-
-/* ── UTIL ── */
-.mt4{margin-top:4px}
-.mt8{margin-top:8px}
-.mt16{margin-top:16px}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <div class="header-pill">YECOSA (YCI) 06 SET</div>
   <h1>Executive Election Ballot 2026</h1>
   <p>Yewa College, Ilaro · Class of 2006 · Official Election</p>
 </div>
 
-<!-- STEP INDICATOR -->
 <div class="steps" id="step-indicator">
   <div class="step active" id="step-1">
     <div class="step-circle">1</div>
-    <div class="step-label">Verify</div>
+    <div class="step-label">Identify</div>
   </div>
   <div class="step-line" id="line-1"></div>
-  <div class="step active" id="step-2" style="opacity:.4">
+  <div class="step" id="step-2" style="opacity:.4">
     <div class="step-circle" style="opacity:.7">2</div>
     <div class="step-label">Vote</div>
   </div>
@@ -178,31 +158,38 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   </div>
 </div>
 
-<!-- ════════ SCREEN 1: VERIFY ════════ -->
+<!-- SCREEN 1: IDENTIFY -->
 <div class="screen active" id="screen-verify">
   <div class="verify-card">
-    <div class="verify-icon">📱</div>
-    <h2>Verify Your Identity</h2>
-    <p>Enter your registered phone number to access the ballot.<br>Only registered YECOSA (YCI) 06 SET members may vote.</p>
+    <div class="verify-icon">🧑‍🤝‍🧑</div>
+    <h2>Who Are You?</h2>
+    <p>Search for your name below to identify yourself as a registered YECOSA (YCI) 06 SET member.</p>
 
-    <div class="phone-input-wrap">
-      <div class="phone-prefix">+234</div>
-      <input class="phone-input" id="phone-input" type="tel" placeholder="8XXXXXXXXX" maxlength="13"
-             oninput="onPhoneInput()" onkeydown="if(event.key==='Enter')verifyPhone()">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" id="name-input" type="text" placeholder="Type your first or last name…"
+             autocomplete="off" oninput="onNameInput()">
     </div>
+    <div class="results-list" id="results-list"></div>
+
+    <div class="sel-badge" id="sel-badge">
+      <div class="av" id="sel-av"></div>
+      <div class="nm" id="sel-nm"></div>
+      <span class="chg" onclick="clearSelection()">Change</span>
+    </div>
+
     <div class="msg" id="verify-msg"></div>
-    <button class="btn btn-green" id="verify-btn" onclick="verifyPhone()" disabled>Verify &amp; Enter Ballot</button>
+    <button class="btn btn-green" id="verify-btn" onclick="proceedToVote()" disabled>Proceed to Ballot →</button>
 
     <div class="privacy-note">
       <span>🔒</span>
-      <p>Your vote is anonymous. Your phone number is only used to confirm you are a registered member and prevent double-voting. No personal data is stored beyond this session.</p>
+      <p>Your name is only used to confirm you are a registered member and prevent double-voting. Your individual vote choices remain anonymous.</p>
     </div>
   </div>
 </div>
 
-<!-- ════════ SCREEN 2: BALLOT ════════ -->
+<!-- SCREEN 2: BALLOT -->
 <div class="screen" id="screen-ballot">
-
   <div class="ballot-header">
     <div class="ballot-header-icon">🗳</div>
     <div class="ballot-header-text">
@@ -211,13 +198,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
       <div class="voter-badge" id="voter-badge">Verified Member</div>
     </div>
   </div>
-
-  <!-- POSITIONS INJECTED BY JS -->
   <div id="ballot-positions"></div>
-
-  <div style="height:80px"></div><!-- spacer for fixed footer -->
-
-  <!-- SUBMIT FOOTER -->
+  <div style="height:80px"></div>
   <div class="submit-footer">
     <div class="submit-inner">
       <div class="progress-text">
@@ -230,7 +212,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   </div>
 </div>
 
-<!-- ════════ SCREEN 3: CONFIRM ════════ -->
+<!-- SCREEN 3: CONFIRM -->
 <div class="screen" id="screen-confirm">
   <div class="confirm-card">
     <div class="confirm-title">⚖️ Review Your Choices</div>
@@ -243,7 +225,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   </div>
 </div>
 
-<!-- ════════ SCREEN 4: SUCCESS ════════ -->
+<!-- SCREEN 4: SUCCESS -->
 <div class="screen" id="screen-success">
   <div class="success-card">
     <div class="success-icon">🎉</div>
@@ -253,7 +235,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
       <div class="ref-label">Your Vote Reference</div>
       <div class="ref-code" id="vote-ref">—</div>
     </div>
-    <a class="results-link" href="YECOSA_Results.html" target="_blank">
+    <a class="results-link" href="results.html" target="_blank">
       <div class="results-link-icon">📊</div>
       <div class="results-link-text">
         <div class="rl-title">View Live Election Results</div>
@@ -265,14 +247,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
   </div>
 </div>
 
-<!-- ════════ SCREEN 5: ALREADY VOTED ════════ -->
+<!-- SCREEN 5: ALREADY VOTED -->
 <div class="screen" id="screen-voted">
   <div class="voted-card">
     <div class="voted-icon">✅</div>
     <h2>You Have Already Voted</h2>
-    <p>Our records show that a vote has been cast from this device or phone number. Each member may only vote once.</p>
+    <p>Our records show that a vote has already been cast from this device. Each member may only vote once.</p>
     <p>If you believe this is an error, please contact the election committee.</p>
-    <a class="results-link" href="YECOSA_Results.html" target="_blank" style="margin-top:20px;display:flex">
+    <a class="results-link" href="results.html" target="_blank" style="margin-top:20px;display:flex">
       <div class="results-link-icon">📊</div>
       <div class="results-link-text">
         <div class="rl-title">View Live Election Results</div>
@@ -284,409 +266,289 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-h
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════════
-// MEMBER LIST — replace placeholder numbers with real ones
-// Format: normalised 11-digit Nigerian numbers (08XXXXXXXXX)
-// ══════════════════════════════════════════════════════════
 const MEMBERS = [
-  '+2348000000001','+2348000000002','+2348000000003','+2348000000004','+2348000000005',
-  '+2348000000006','+2348000000007','+2348000000008','+2348000000009','+2348000000010',
-  '+2348000000011','+2348000000012','+2348000000013','+2348000000014','+2348000000015',
-  '+2348000000016','+2348000000017','+2348000000018','+2348000000019','+2348000000020',
-  '+2348000000021','+2348000000022','+2348000000023','+2348000000024','+2348000000025',
-  '+2348000000026','+2348000000027','+2348000000028','+2348000000029','+2348000000030',
-  '+2348000000031','+2348000000032','+2348000000033','+2348000000034','+2348000000035',
-  '+2348000000036','+2348000000037','+2348000000038','+2348000000039','+2348000000040',
-  '+2348000000041','+2348000000042','+2348000000043','+2348000000044','+2348000000045',
-  '+2348000000046','+2348000000047','+2348000000048','+2348000000049','+2348000000050',
-  '+2348000000051','+2348000000052','+2348000000053','+2348000000054','+2348000000055',
-  '+2348000000056','+2348000000057','+2348000000058','+2348000000059','+2348000000060',
-  '+2348000000061','+2348000000062','+2348000000063','+2348000000064','+2348000000065',
-  '+2348000000066','+2348000000067','+2348000000068','+2348000000069','+2348000000070',
-  '+2348000000071','+2348000000072','+2348000000073','+2348000000074','+2348000000075',
-  '+2348000000076','+2348000000077','+2348000000078','+2348000000079','+2348000000080',
-  '+2348000000081','+2348000000082','+2348000000083','+2348000000084','+2348000000085',
-  '+2348000000086','+2348000000087','+2348000000088','+2348000000089','+2348000000090'
+  {id:1,  first:'Abdulrasheed', last:'Adewale'},
+  {id:2,  first:'Abosede',      last:'Oluwole'},
+  {id:3,  first:'Abiodun',      last:'Ifenaike'},
+  {id:4,  first:'Abdurahman',   last:'Adaranijo'},
+  {id:5,  first:'Adebayo',      last:'Ogundimu'},
+  {id:6,  first:'Adebimpe',     last:'Arowolo'},
+  {id:7,  first:'Adedapo',      last:'Oluwole'},
+  {id:8,  first:'Adedayo',      last:'Bamgbose'},
+  {id:9,  first:'Adedayo',      last:'Egberongbe'},
+  {id:10, first:'Adedoyin',     last:'Agboola'},
+  {id:11, first:'Adefunke',     last:'Adesanya'},
+  {id:12, first:'Adejoke',      last:'Olatunji'},
+  {id:13, first:'Adeleke',      last:'Ogundare'},
+  {id:14, first:'Adenike',      last:'Adesola'},
+  {id:15, first:'Adenike',      last:'Oladoye'},
+  {id:16, first:'Adeniyi',      last:'Olawale'},
+  {id:17, first:'Adewale',      last:'Akinola'},
+  {id:18, first:'Adewale',      last:'Oduola'},
+  {id:19, first:'Adewumi',      last:'Olaniyan'},
+  {id:20, first:'Adeyemi',      last:'Afolabi'},
+  {id:21, first:'Adeyinka',     last:'Badmus'},
+  {id:22, first:'Afolabi',      last:'Oluwaseun'},
+  {id:23, first:'Akinola',      last:'Akinbiyi'},
+  {id:24, first:'Akinwale',     last:'Akinbode'},
+  {id:25, first:'Akinwumi',     last:'Adeniyi'},
+  {id:26, first:'Alaba',        last:'Oluwafemi'},
+  {id:27, first:'Alhaji',       last:'Ogundele'},
+  {id:28, first:'Aminat',       last:'Lawal'},
+  {id:29, first:'Ayodele',      last:'Ogundipe'},
+  {id:30, first:'Ayodele',      last:'Oluwole'},
+  {id:31, first:'Ayomide',      last:'Adeleke'},
+  {id:32, first:'Basirat',      last:'Olatunji'},
+  {id:33, first:'Bukola',       last:'Adeyemi'},
+  {id:34, first:'Busayo',       last:'Ogunleye'},
+  {id:35, first:'Damilola',     last:'Adesanya'},
+  {id:36, first:'Damilola',     last:'Oluwafemi'},
+  {id:37, first:'Emmanuel',     last:'Okonkwo'},
+  {id:38, first:'Esther',       last:'Adebayo'},
+  {id:39, first:'Fatimah',      last:'Oladipupo'},
+  {id:40, first:'Funke',        last:'Abiodun'},
+  {id:41, first:'Gbenga',       last:'Adeyemi'},
+  {id:42, first:'Ibrahim',      last:'Ogunleye'},
+  {id:43, first:'Idowu',        last:'Adesanya'},
+  {id:44, first:'Iyabo',        last:'Oladele'},
+  {id:45, first:'Johnson',      last:'Oluwafemi'},
+  {id:46, first:'Kehinde',      last:'Adewale'},
+  {id:47, first:'Kehinde',      last:'Olaleye'},
+  {id:48, first:'Kemi',         last:'Adesanya'},
+  {id:49, first:'Kunle',        last:'Adewale'},
+  {id:50, first:'Lateef',       last:'Ogunlade'},
+  {id:51, first:'Modinat',      last:'Bello'},
+  {id:52, first:'Modupe',       last:'Olawale'},
+  {id:53, first:'Motunrayo',    last:'Alimi'},
+  {id:54, first:'Motunrayo',    last:'Azeez'},
+  {id:55, first:'Muftau',       last:'Ogunlade'},
+  {id:56, first:'Niyi',         last:'Afolabi'},
+  {id:57, first:'Olasubomi',    last:'Adeyemi'},
+  {id:58, first:'Olajumoke',    last:'Aikulola'},
+  {id:59, first:'Olalekan',     last:'Olaniyan'},
+  {id:60, first:'Olanrewaju',   last:'Adeyemi'},
+  {id:61, first:'Olatunde',     last:'Badmus'},
+  {id:62, first:'Olawale',      last:'Adeyemi'},
+  {id:63, first:'Olawale',      last:'Ogundimu'},
+  {id:64, first:'Olayemi',      last:'Adewale'},
+  {id:65, first:'Olayinka',     last:'Ogunyemi'},
+  {id:66, first:'Olusegun',     last:'Adeleke'},
+  {id:67, first:'Oluseun',      last:'Joseph'},
+  {id:68, first:'Oluwatobi',    last:'Adeyemi'},
+  {id:69, first:'Opeyemi',      last:'Adesanya'},
+  {id:70, first:'Rasheed',      last:'Adebayo'},
+  {id:71, first:'Ronke',        last:'Oladele'},
+  {id:72, first:'Saheed',       last:'Ogunleye'},
+  {id:73, first:'Sekinat',      last:'Popoola Odebiyi'},
+  {id:74, first:'Seun',         last:'Adewale'},
+  {id:75, first:'Taiwo',        last:'Adewale'},
+  {id:76, first:'Toyin',        last:'Olawale'},
+  {id:77, first:'Yetunde',      last:'Adeyemi'}
 ];
 
-// ══════════════════════════════════════════════════════════
-// POSITIONS & NOMINEES — update with real candidate names
-// ══════════════════════════════════════════════════════════
+const AVATAR_COLORS = ['#1B5E2F','#2E7D5A','#C8A84B','#5A6B5D','#236B39','#A03025','#0F3D1E'];
+function avatarColor(id){ return AVATAR_COLORS[(id-1) % AVATAR_COLORS.length]; }
+function initials(m){ return (m.first[0]+(m.last[0]||'')).toUpperCase(); }
+
 const POSITIONS = [
-  {
-    id: 'president',
-    title: 'President',
-    emoji: '🏛',
-    nominees: [
-      { id: 'p1', name: 'Olajumoke Aikulola' },
-      { id: 'p2', name: 'Oluseun Joseph' },
-    ]
-  },
-  {
-    id: 'vp',
-    title: 'Vice President',
-    emoji: '🤝',
-    nominees: [
-      { id: 'v1', name: 'Abdurahman Adaranijo' },
-      { id: 'v2', name: 'Abiodun Ifenaike' },
-    ]
-  },
-  {
-    id: 'treasurer',
-    title: 'Treasurer',
-    emoji: '💰',
-    nominees: [
-      { id: 't1', name: 'Basirat Olatunji' },
-      { id: 't2', name: 'Modinat Bello' },
-    ]
-  },
-  {
-    id: 'finsec',
-    title: 'Financial Secretary',
-    emoji: '📒',
-    nominees: [
-      { id: 'f1', name: 'Motunrayo Azeez' },
-      { id: 'f2', name: 'Olalekan Olaniyan' },
-    ]
-  },
-  {
-    id: 'welfare',
-    title: 'Welfare Officer',
-    emoji: '❤️',
-    nominees: [
-      { id: 'w1', name: 'Sekinat Popoola Odebiyi' },
-      { id: 'w2', name: 'Motunrayo Alimi' },
-    ]
-  }
+  {id:'president',title:'President',emoji:'🏛',nominees:[{id:'p1',name:'Olajumoke Aikulola'},{id:'p2',name:'Oluseun Joseph'}]},
+  {id:'vp',title:'Vice President',emoji:'🤝',nominees:[{id:'v1',name:'Abdurahman Adaranijo'},{id:'v2',name:'Abiodun Ifenaike'}]},
+  {id:'treasurer',title:'Treasurer',emoji:'💰',nominees:[{id:'t1',name:'Basirat Olatunji'},{id:'t2',name:'Modinat Bello'}]},
+  {id:'finsec',title:'Financial Secretary',emoji:'📒',nominees:[{id:'f1',name:'Motunrayo Azeez'},{id:'f2',name:'Olalekan Olaniyan'}]},
+  {id:'welfare',title:'Welfare Officer',emoji:'❤️',nominees:[{id:'w1',name:'Sekinat Popoola Odebiyi'},{id:'w2',name:'Motunrayo Alimi'}]}
 ];
 
-// ══════════════════════════════════════════════════════════
-// STATE
-// ══════════════════════════════════════════════════════════
-let verifiedPhone = null;
-const selections = {}; // { positionId: nomineeId | 'abstain' }
-const LS_VOTED    = 'yci_voted_2026';
-const LS_PHONES   = 'yci_voted_phones_2026';
-const LS_VOTES    = 'yci_votes_2026';
+let verifiedMember = null;
+const selections = {};
+const LS_VOTED = 'yci_voted_2026';
+const LS_IDS   = 'yci_voted_ids_2026';
 
-// ══════════════════════════════════════════════════════════
-// NORMALISE PHONE
-// ══════════════════════════════════════════════════════════
-function normalise(raw) {
-  let d = raw.replace(/\D/g, '');
-  if (d.startsWith('234') && d.length >= 13) d = d.slice(3);  // strip 234 prefix
-  if (d.startsWith('0') && d.length === 11) d = d.slice(1);   // strip leading 0 → 10 digits
-  if (d.length !== 10) return null;
-  return '+234' + d;
-}
-
-// ══════════════════════════════════════════════════════════
-// PHONE INPUT HANDLER
-// ══════════════════════════════════════════════════════════
-function onPhoneInput() {
-  const input = document.getElementById('phone-input');
-  const btn   = document.getElementById('verify-btn');
-  const msg   = document.getElementById('verify-msg');
-  input.classList.remove('error', 'ok');
-  msg.className = 'msg';
-  msg.textContent = '';
-  // enable verify if there's something to check
-  const raw = input.value.trim();
-  btn.disabled = raw.length < 8;
-}
-
-// ══════════════════════════════════════════════════════════
-// VERIFY PHONE
-// ══════════════════════════════════════════════════════════
-function verifyPhone() {
-  const input  = document.getElementById('phone-input');
-  const msg    = document.getElementById('verify-msg');
-  const raw    = input.value.trim();
-  const norm   = normalise(raw);
-
-  if (!norm) {
-    setMsg('error', '⚠️ Invalid phone number format. Enter your 10-digit number (e.g. 0812 345 6789).');
-    input.classList.add('error');
-    return;
+function onNameInput() {
+  const q = document.getElementById('name-input').value.trim().toLowerCase();
+  const list = document.getElementById('results-list');
+  if (verifiedMember) clearSelection();
+  if (q.length < 2) { list.style.display='none'; list.innerHTML=''; document.getElementById('verify-btn').disabled=true; return; }
+  const matches = MEMBERS.filter(m => m.first.toLowerCase().includes(q) || m.last.toLowerCase().includes(q)).slice(0,8);
+  if (matches.length === 0) {
+    list.innerHTML = '<div class="no-results">No member found — try a different spelling</div>';
+    list.style.display = 'block'; return;
   }
+  list.innerHTML = matches.map(m =>
+    '<div class="result-item" onclick="selectMember('+m.id+')">' +
+    '<div class="result-avatar" style="background:'+avatarColor(m.id)+'">'+initials(m)+'</div>' +
+    '<div><div class="result-name">'+m.first+' '+m.last+'</div><div class="result-sub">Member #'+m.id+'</div></div></div>'
+  ).join('');
+  list.style.display = 'block';
+}
 
-  // Check device lock first
+function selectMember(id) {
+  const m = MEMBERS.find(x => x.id === id);
+  if (!m) return;
+  verifiedMember = m;
+  document.getElementById('results-list').style.display = 'none';
+  document.getElementById('name-input').value = '';
+  document.getElementById('name-input').placeholder = 'Member selected';
+  document.getElementById('sel-av').style.background = avatarColor(m.id);
+  document.getElementById('sel-av').textContent = initials(m);
+  document.getElementById('sel-nm').textContent = m.first + ' ' + m.last;
+  document.getElementById('sel-badge').classList.add('show');
+  document.getElementById('verify-msg').className = 'msg';
+  document.getElementById('verify-btn').disabled = false;
+}
+
+function clearSelection() {
+  verifiedMember = null;
+  document.getElementById('sel-badge').classList.remove('show');
+  document.getElementById('name-input').placeholder = 'Type your first or last name…';
+  document.getElementById('verify-btn').disabled = true;
+  document.getElementById('verify-msg').className = 'msg';
+}
+
+function proceedToVote() {
+  if (!verifiedMember) return;
+  const memberId = String(verifiedMember.id);
   let votedDevice = false;
   try { votedDevice = localStorage.getItem(LS_VOTED) === '1'; } catch(e) {}
-  if (votedDevice) {
-    showScreen('voted');
-    return;
-  }
-
-  // Check if phone already voted
-  let votedPhones = [];
-  try { votedPhones = JSON.parse(localStorage.getItem(LS_PHONES) || '[]'); } catch(e) {}
-  if (votedPhones.includes(norm)) {
-    showScreen('voted');
-    return;
-  }
-
-  // Check membership
-  if (!MEMBERS.includes(norm)) {
-    setMsg('error', '🚫 This phone number is not on the registered member list. Please check the number or contact the election committee.');
-    input.classList.add('error');
-    return;
-  }
-
-  // ✅ Verified
-  verifiedPhone = norm;
-  input.classList.add('ok');
-  setMsg('success', '✅ Verified! Loading your ballot...');
-  setTimeout(() => {
-    buildBallot();
-    showScreen('ballot');
-    setStep(2);
-  }, 900);
-}
-
-function setMsg(type, text) {
+  if (votedDevice) { showScreen('voted'); return; }
+  let votedIds = [];
+  try { votedIds = JSON.parse(localStorage.getItem(LS_IDS) || '[]'); } catch(e) {}
+  if (votedIds.includes(memberId)) { showScreen('voted'); return; }
   const msg = document.getElementById('verify-msg');
-  msg.className = 'msg ' + type;
-  msg.textContent = text;
+  msg.className = 'msg success';
+  msg.textContent = '✅ Identity confirmed! Loading your ballot…';
+  setTimeout(() => { buildBallot(); showScreen('ballot'); setStep(2); }, 900);
 }
 
-// ══════════════════════════════════════════════════════════
-// BUILD BALLOT
-// ══════════════════════════════════════════════════════════
 function buildBallot() {
-  const badge = document.getElementById('voter-badge');
-  badge.textContent = 'Verified: ' + verifiedPhone;
-
+  document.getElementById('voter-badge').textContent = 'Voting as: ' + verifiedMember.first + ' ' + verifiedMember.last;
   const container = document.getElementById('ballot-positions');
   container.innerHTML = '';
-
   POSITIONS.forEach((pos, idx) => {
     const card = document.createElement('div');
     card.className = 'position-card';
     card.id = 'pos-card-' + pos.id;
-
     let nomHtml = '';
     pos.nominees.forEach(nom => {
-      const initials = nom.name.split(' ').filter(w => /^[A-Z]/.test(w)).slice(0,2).map(w => w[0]).join('') || nom.name[0];
-      nomHtml += `
-        <label class="nominee-label" id="lbl-${pos.id}-${nom.id}" onclick="pickNominee('${pos.id}','${nom.id}',this)">
-          <input type="radio" name="${pos.id}" value="${nom.id}">
-          <div class="nominee-avatar" id="av-${pos.id}-${nom.id}">${initials}</div>
-          <div class="nominee-name">${nom.name}</div>
-          <div class="nominee-check" id="chk-${pos.id}-${nom.id}">✓</div>
-        </label>`;
+      const inits = nom.name.split(' ').filter(w => /^[A-Z]/.test(w)).slice(0,2).map(w=>w[0]).join('') || nom.name[0];
+      nomHtml += '<label class="nominee-label" id="lbl-'+pos.id+'-'+nom.id+'" onclick="pickNominee(\''+pos.id+'\',\''+nom.id+'\',this)">' +
+        '<input type="radio" name="'+pos.id+'" value="'+nom.id+'">' +
+        '<div class="nominee-avatar" id="av-'+pos.id+'-'+nom.id+'">'+inits+'</div>' +
+        '<div class="nominee-name">'+nom.name+'</div>' +
+        '<div class="nominee-check" id="chk-'+pos.id+'-'+nom.id+'">✓</div></label>';
     });
-
-    card.innerHTML = `
-      <div class="pos-header">
-        <div class="pos-number">${idx+1}</div>
-        <div class="pos-title">${pos.emoji} ${pos.title}</div>
-        <div class="pos-tag" id="tag-${pos.id}">Not selected</div>
-      </div>
-      <div class="nominees">${nomHtml}</div>
-      <div class="abstain-row">
-        <label class="abstain-label" id="lbl-${pos.id}-abstain" onclick="pickNominee('${pos.id}','abstain',this)">
-          <input type="radio" name="${pos.id}" value="abstain">
-          <span>— Abstain from this position</span>
-        </label>
-      </div>`;
+    card.innerHTML = '<div class="pos-header"><div class="pos-number">'+(idx+1)+'</div><div class="pos-title">'+pos.emoji+' '+pos.title+'</div><div class="pos-tag" id="tag-'+pos.id+'">Not selected</div></div>' +
+      '<div class="nominees">'+nomHtml+'</div>' +
+      '<div class="abstain-row"><label class="abstain-label" id="lbl-'+pos.id+'-abstain" onclick="pickNominee(\''+pos.id+'\',\'abstain\',this)"><input type="radio" name="'+pos.id+'" value="abstain"><span>— Abstain from this position</span></label></div>';
     container.appendChild(card);
   });
-
   updateSubmitStatus();
 }
 
-// ══════════════════════════════════════════════════════════
-// PICK NOMINEE
-// ══════════════════════════════════════════════════════════
 function pickNominee(posId, nomId, clickedLabel) {
-  // De-select all nominees in this position
   const pos = POSITIONS.find(p => p.id === posId);
-  pos.nominees.forEach(nom => {
-    const lbl = document.getElementById('lbl-' + posId + '-' + nom.id);
-    if (lbl) lbl.classList.remove('selected');
-  });
-  const abstainLbl = document.getElementById('lbl-' + posId + '-abstain');
-  if (abstainLbl) abstainLbl.classList.remove('selected');
-
-  // Select clicked
+  pos.nominees.forEach(nom => { const l=document.getElementById('lbl-'+posId+'-'+nom.id); if(l)l.classList.remove('selected'); });
+  const ab = document.getElementById('lbl-'+posId+'-abstain');
+  if(ab) ab.classList.remove('selected');
   clickedLabel.classList.add('selected');
   selections[posId] = nomId;
-
-  // Update tag
-  const tag = document.getElementById('tag-' + posId);
-  if (nomId === 'abstain') {
-    tag.textContent = 'Abstaining';
-    tag.style.background = 'rgba(255,255,255,0.1)';
-  } else {
-    const nom = pos.nominees.find(n => n.id === nomId);
-    tag.textContent = '✓ Selected';
-    tag.style.background = 'rgba(240,200,48,0.25)';
-    tag.style.color = '#F0C830';
-  }
-
-  // Highlight card
-  const card = document.getElementById('pos-card-' + posId);
-  card.style.borderColor = '#236B39';
-
+  const tag = document.getElementById('tag-'+posId);
+  if (nomId==='abstain') { tag.textContent='Abstaining'; tag.style.background='rgba(255,255,255,0.1)'; }
+  else { tag.textContent='✓ Selected'; tag.style.background='rgba(240,200,48,0.25)'; tag.style.color='#F0C830'; }
+  document.getElementById('pos-card-'+posId).style.borderColor='#236B39';
   updateSubmitStatus();
 }
 
-// ══════════════════════════════════════════════════════════
-// UPDATE SUBMIT STATUS
-// ══════════════════════════════════════════════════════════
 function updateSubmitStatus() {
   const count = Object.keys(selections).length;
   document.getElementById('sel-count').textContent = count;
-  document.getElementById('progress-fill').style.width = (count / 5 * 100) + '%';
-
-  const remaining = 5 - count;
-  if (remaining === 0) {
-    document.getElementById('sel-label').textContent = 'All positions selected — ready to review!';
-    document.getElementById('submit-btn').disabled = false;
-  } else {
-    document.getElementById('sel-label').textContent = remaining + ' position' + (remaining > 1 ? 's' : '') + ' remaining';
-    document.getElementById('submit-btn').disabled = true;
-  }
+  document.getElementById('progress-fill').style.width = (count/5*100)+'%';
+  const rem = 5-count;
+  if(rem===0){ document.getElementById('sel-label').textContent='All positions selected — ready to review!'; document.getElementById('submit-btn').disabled=false; }
+  else { document.getElementById('sel-label').textContent=rem+' position'+(rem>1?'s':'')+' remaining'; document.getElementById('submit-btn').disabled=true; }
 }
 
-// ══════════════════════════════════════════════════════════
-// GO TO CONFIRM
-// ══════════════════════════════════════════════════════════
 function goToConfirm() {
-  // Build confirm rows
   const rows = document.getElementById('confirm-rows');
   rows.innerHTML = '';
   POSITIONS.forEach(pos => {
     const selId = selections[pos.id];
-    let choiceText, isAbstain = false;
-    if (selId === 'abstain') {
-      choiceText = 'Abstaining';
-      isAbstain = true;
-    } else {
-      const nom = pos.nominees.find(n => n.id === selId);
-      choiceText = nom ? nom.name : '—';
-    }
-    rows.innerHTML += `
-      <div class="confirm-row">
-        <div class="confirm-pos">${pos.emoji} ${pos.title}</div>
-        <div class="confirm-choice ${isAbstain ? 'abstain' : ''}">${choiceText}</div>
-      </div>`;
+    let choiceText, isAbstain=false;
+    if(selId==='abstain'){ choiceText='Abstaining'; isAbstain=true; }
+    else { const nom=pos.nominees.find(n=>n.id===selId); choiceText=nom?nom.name:'—'; }
+    rows.innerHTML += '<div class="confirm-row"><div class="confirm-pos">'+pos.emoji+' '+pos.title+'</div><div class="confirm-choice '+(isAbstain?'abstain':'')+'">'+choiceText+'</div></div>';
   });
-
-  showScreen('confirm');
-  setStep(3);
+  showScreen('confirm'); setStep(3);
 }
 
-function goBack() {
-  showScreen('ballot');
-  setStep(2);
-}
+function goBack(){ showScreen('ballot'); setStep(2); }
 
-// ══════════════════════════════════════════════════════════
-// APPS SCRIPT WEB APP URL
-// ══════════════════════════════════════════════════════════
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxql8IQ_VeHxGf69e6Q1AJQWtKhFw2oxdXv7lZAnhLzoXdv4rlUNncaaJ2DpZDr0nGljA/exec';
-const ELECTION_OPEN  = new Date('2026-10-24T00:00:00');
+const ELECTION_OPEN  = new Date('2026-10-26T00:00:00');
 const ELECTION_CLOSE = new Date('2026-10-28T23:59:00');
 
-// ══════════════════════════════════════════════════════════
-// SUBMIT VOTE
-// ══════════════════════════════════════════════════════════
 function submitVote() {
-  // Device lock immediately so double-tap can't submit twice
+  const memberId   = String(verifiedMember.id);
+  const memberName = verifiedMember.first + ' ' + verifiedMember.last;
   try {
     localStorage.setItem(LS_VOTED, '1');
-    let votedPhones = [];
-    try { votedPhones = JSON.parse(localStorage.getItem(LS_PHONES) || '[]'); } catch(e) {}
-    if (!votedPhones.includes(verifiedPhone)) votedPhones.push(verifiedPhone);
-    localStorage.setItem(LS_PHONES, JSON.stringify(votedPhones));
+    let votedIds = [];
+    try { votedIds = JSON.parse(localStorage.getItem(LS_IDS)||'[]'); } catch(e) {}
+    if(!votedIds.includes(memberId)) votedIds.push(memberId);
+    localStorage.setItem(LS_IDS, JSON.stringify(votedIds));
   } catch(e) {}
-
-  // Generate reference
   const ref = 'YCI26-' + Math.random().toString(36).substring(2,8).toUpperCase();
   document.getElementById('vote-ref').textContent = ref;
-
-  // Show success screen immediately
   showScreen('success');
   document.getElementById('step-indicator').style.display = 'none';
-
-  // Send to Google Sheets via image ping — no CORS issues on any device
   var params = '?action=vote'
-    + '&phone='     + encodeURIComponent(verifiedPhone)
-    + '&president=' + encodeURIComponent(selections['president'] || 'abstain')
-    + '&vp='        + encodeURIComponent(selections['vp']        || 'abstain')
-    + '&treasurer=' + encodeURIComponent(selections['treasurer'] || 'abstain')
-    + '&finsec='    + encodeURIComponent(selections['finsec']    || 'abstain')
-    + '&welfare='   + encodeURIComponent(selections['welfare']   || 'abstain');
+    + '&memberId='   + encodeURIComponent(memberId)
+    + '&memberName=' + encodeURIComponent(memberName)
+    + '&president='  + encodeURIComponent(selections['president']||'abstain')
+    + '&vp='         + encodeURIComponent(selections['vp']||'abstain')
+    + '&treasurer='  + encodeURIComponent(selections['treasurer']||'abstain')
+    + '&finsec='     + encodeURIComponent(selections['finsec']||'abstain')
+    + '&welfare='    + encodeURIComponent(selections['welfare']||'abstain');
   var img = new Image();
   img.src = APPS_SCRIPT_URL + params;
 }
 
-// ══════════════════════════════════════════════════════════
-// NAVIGATION
-// ══════════════════════════════════════════════════════════
 function showScreen(name) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-' + name).classList.add('active');
+  document.getElementById('screen-'+name).classList.add('active');
 }
 
 function setStep(n) {
-  for (let i = 1; i <= 3; i++) {
-    const step = document.getElementById('step-' + i);
-    step.style.opacity = '1';
-    if (i < n) {
-      step.className = 'step done';
-      step.querySelector('.step-circle').style.opacity = '1';
-    } else if (i === n) {
-      step.className = 'step active';
-      step.querySelector('.step-circle').style.opacity = '1';
-    } else {
-      step.className = 'step';
-      step.style.opacity = '.4';
-    }
+  for(let i=1;i<=3;i++){
+    const step=document.getElementById('step-'+i);
+    step.style.opacity='1';
+    if(i<n){step.className='step done';step.querySelector('.step-circle').style.opacity='1';}
+    else if(i===n){step.className='step active';step.querySelector('.step-circle').style.opacity='1';}
+    else{step.className='step';step.style.opacity='.4';}
   }
-  for (let i = 1; i <= 2; i++) {
-    const line = document.getElementById('line-' + i);
-    line.className = 'step-line ' + (i < n ? 'done' : '');
-  }
+  for(let i=1;i<=2;i++){document.getElementById('line-'+i).className='step-line '+(i<n?'done':'');}
 }
 
-// ══════════════════════════════════════════════════════════
-// INIT — check date and device lock on load
-// ══════════════════════════════════════════════════════════
 (function init() {
   const now = new Date();
-
-  // Not yet open
   if (now < ELECTION_OPEN) {
-    document.getElementById('step-indicator').style.display = 'none';
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    const b = document.createElement('div');
-    b.style.cssText = 'max-width:560px;margin:32px auto;padding:0 16px;text-align:center';
-    b.innerHTML = '<div style="background:#fff;border-radius:16px;border:1.5px solid #C8D4CA;padding:36px 24px"><div style="font-size:44px;margin-bottom:14px">🗓</div><h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:20px;color:#1B5E2F;margin-bottom:8px">Voting Not Yet Open</h2><p style="font-size:13.5px;color:#5A6B5D;line-height:1.7">Voting opens on <strong>Monday 26 October 2026</strong> and closes <strong>Wednesday 28 October 2026 at 11:59 PM</strong>.<br><br>Please come back then to cast your vote.</p></div>';
-    document.body.appendChild(b);
-    return;
+    document.getElementById('step-indicator').style.display='none';
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    const b=document.createElement('div');
+    b.style.cssText='max-width:560px;margin:32px auto;padding:0 16px;text-align:center';
+    b.innerHTML='<div style="background:#fff;border-radius:16px;border:1.5px solid #C8D4CA;padding:36px 24px"><div style="font-size:44px;margin-bottom:14px">🗓</div><h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:20px;color:#1B5E2F;margin-bottom:8px">Voting Not Yet Open</h2><p style="font-size:13.5px;color:#5A6B5D;line-height:1.7">Voting opens on <strong>Monday 26 October 2026</strong> and closes <strong>Wednesday 28 October 2026 at 11:59 PM</strong>.<br><br>Please come back then to cast your vote.</p></div>';
+    document.body.appendChild(b); return;
   }
-
-  // Closed
   if (now > ELECTION_CLOSE) {
-    document.getElementById('step-indicator').style.display = 'none';
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    const b = document.createElement('div');
-    b.style.cssText = 'max-width:560px;margin:32px auto;padding:0 16px;text-align:center';
-    b.innerHTML = '<div style="background:#fff;border-radius:16px;border:1.5px solid #C8D4CA;padding:36px 24px"><div style="font-size:44px;margin-bottom:14px">🔒</div><h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:20px;color:#A03025;margin-bottom:8px">Voting Closed</h2><p style="font-size:13.5px;color:#5A6B5D;line-height:1.7">The election closed on <strong>Wednesday 28 October 2026 at 11:59 PM</strong>.<br><br>Results will be announced by the election committee.</p></div>';
-    document.body.appendChild(b);
-    return;
+    document.getElementById('step-indicator').style.display='none';
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    const b=document.createElement('div');
+    b.style.cssText='max-width:560px;margin:32px auto;padding:0 16px;text-align:center';
+    b.innerHTML='<div style="background:#fff;border-radius:16px;border:1.5px solid #C8D4CA;padding:36px 24px"><div style="font-size:44px;margin-bottom:14px">🔒</div><h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:20px;color:#A03025;margin-bottom:8px">Voting Closed</h2><p style="font-size:13.5px;color:#5A6B5D;line-height:1.7">The election closed on <strong>Wednesday 28 October 2026 at 11:59 PM</strong>.<br><br>Results will be announced by the election committee.</p></div>';
+    document.body.appendChild(b); return;
   }
-
-  // Check device lock
-  let votedDevice = false;
-  try { votedDevice = localStorage.getItem(LS_VOTED) === '1'; } catch(e) {}
-  if (votedDevice) {
-    showScreen('voted');
-    document.getElementById('step-indicator').style.display = 'none';
-  }
+  let votedDevice=false;
+  try { votedDevice=localStorage.getItem(LS_VOTED)==='1'; } catch(e) {}
+  if(votedDevice){ showScreen('voted'); document.getElementById('step-indicator').style.display='none'; }
 })();
 </script>
 </body>
